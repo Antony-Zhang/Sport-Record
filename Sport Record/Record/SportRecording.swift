@@ -1,20 +1,20 @@
 //
-//  ContentView.swift
+//  SportRecording.swift
 //  Sport Record
 //
-//  Created by EastOS on 2023/4/27.
+//  Created by EastOS on 2023/5/7.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct SportRecording: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SportRecording_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SportRecording()
     }
 }

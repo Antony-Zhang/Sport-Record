@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		018CCB212A03BFE90007770B /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB202A03BFE90007770B /* UserRegister.swift */; };
+		018CCB232A03C0420007770B /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB222A03C0420007770B /* UserLogin.swift */; };
+		018CCB272A03C1E90007770B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB262A03C1E90007770B /* Settings.swift */; };
+		018CCB292A03C2260007770B /* UserHomepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB282A03C2260007770B /* UserHomepage.swift */; };
+		018E72FF2A07E4A500D5017A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E72FE2A07E4A500D5017A /* UserInfo.swift */; };
+		018E73012A07E70A00D5017A /* SportRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73002A07E70A00D5017A /* SportRecording.swift */; };
+		018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73032A07E76B00D5017A /* RecordCharts.swift */; };
+		018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73052A07E78D00D5017A /* RecordDetails.swift */; };
+		018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73072A07E7B200D5017A /* RecordAnalysis.swift */; };
 		018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */; };
 		018EF3B429FA48DE002CC0E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B329FA48DE002CC0E1 /* ContentView.swift */; };
 		018EF3B629FA48DF002CC0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EF3B529FA48DF002CC0E1 /* Assets.xcassets */; };
@@ -34,6 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		018CCB202A03BFE90007770B /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
+		018CCB222A03C0420007770B /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		018CCB262A03C1E90007770B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		018CCB282A03C2260007770B /* UserHomepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomepage.swift; sourceTree = "<group>"; };
+		018E72FE2A07E4A500D5017A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		018E73002A07E70A00D5017A /* SportRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportRecording.swift; sourceTree = "<group>"; };
+		018E73032A07E76B00D5017A /* RecordCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCharts.swift; sourceTree = "<group>"; };
+		018E73052A07E78D00D5017A /* RecordDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetails.swift; sourceTree = "<group>"; };
+		018E73072A07E7B200D5017A /* RecordAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnalysis.swift; sourceTree = "<group>"; };
 		018EF3AE29FA48DE002CC0E1 /* Sport Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sport Record.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordApp.swift; sourceTree = "<group>"; };
 		018EF3B329FA48DE002CC0E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +89,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		018CCB252A03C1C30007770B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				018CCB262A03C1E90007770B /* Settings.swift */,
+				018CCB282A03C2260007770B /* UserHomepage.swift */,
+				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
+				018CCB222A03C0420007770B /* UserLogin.swift */,
+				018CCB202A03BFE90007770B /* UserRegister.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		018E73022A07E72000D5017A /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				018E73002A07E70A00D5017A /* SportRecording.swift */,
+				018E73032A07E76B00D5017A /* RecordCharts.swift */,
+				018E73052A07E78D00D5017A /* RecordDetails.swift */,
+				018E73072A07E7B200D5017A /* RecordAnalysis.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
 		018EF3A529FA48DE002CC0E1 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +135,8 @@
 		018EF3B029FA48DE002CC0E1 /* Sport Record */ = {
 			isa = PBXGroup;
 			children = (
+				018E73022A07E72000D5017A /* Record */,
+				018CCB252A03C1C30007770B /* User */,
 				018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */,
 				018EF3B329FA48DE002CC0E1 /* ContentView.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
@@ -257,8 +300,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018CCB292A03C2260007770B /* UserHomepage.swift in Sources */,
+				018CCB212A03BFE90007770B /* UserRegister.swift in Sources */,
 				018EF3B429FA48DE002CC0E1 /* ContentView.swift in Sources */,
+				018CCB232A03C0420007770B /* UserLogin.swift in Sources */,
+				018E73012A07E70A00D5017A /* SportRecording.swift in Sources */,
+				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
 				018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */,
+				018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */,
+				018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */,
+				018E72FF2A07E4A500D5017A /* UserInfo.swift in Sources */,
+				018CCB272A03C1E90007770B /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
