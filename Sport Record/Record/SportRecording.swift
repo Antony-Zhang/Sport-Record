@@ -9,7 +9,10 @@ import SwiftUI
 
 struct SportRecording: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("运动记录板块")
+            Text("正在运动……")
+        }
     }
 }
 

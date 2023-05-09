@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecordAnalysis: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("单次运动的更多数据细节")
     }
 }
 

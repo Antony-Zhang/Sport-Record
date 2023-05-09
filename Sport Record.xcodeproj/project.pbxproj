@@ -17,12 +17,14 @@
 		018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73052A07E78D00D5017A /* RecordDetails.swift */; };
 		018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73072A07E7B200D5017A /* RecordAnalysis.swift */; };
 		018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */; };
-		018EF3B429FA48DE002CC0E1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B329FA48DE002CC0E1 /* ContentView.swift */; };
 		018EF3B629FA48DF002CC0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EF3B529FA48DF002CC0E1 /* Assets.xcassets */; };
 		018EF3B929FA48DF002CC0E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EF3B829FA48DF002CC0E1 /* Preview Assets.xcassets */; };
 		018EF3C329FA48DF002CC0E1 /* Sport_RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3C229FA48DF002CC0E1 /* Sport_RecordTests.swift */; };
 		018EF3CD29FA48DF002CC0E1 /* Sport_RecordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3CC29FA48DF002CC0E1 /* Sport_RecordUITests.swift */; };
 		018EF3CF29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */; };
+		0197F9532A08D9B7006AB7BD /* EntrancePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197F9522A08D9B7006AB7BD /* EntrancePage.swift */; };
+		01CDB64A2A0A48E70024E615 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CDB6492A0A48E70024E615 /* Sport.swift */; };
+		01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CDB64B2A0A49BD0024E615 /* Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +56,6 @@
 		018E73072A07E7B200D5017A /* RecordAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnalysis.swift; sourceTree = "<group>"; };
 		018EF3AE29FA48DE002CC0E1 /* Sport Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sport Record.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordApp.swift; sourceTree = "<group>"; };
-		018EF3B329FA48DE002CC0E1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		018EF3B529FA48DF002CC0E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		018EF3B829FA48DF002CC0E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		018EF3BE29FA48DF002CC0E1 /* Sport RecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sport RecordTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +63,9 @@
 		018EF3C829FA48DF002CC0E1 /* Sport RecordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sport RecordUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018EF3CC29FA48DF002CC0E1 /* Sport_RecordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordUITests.swift; sourceTree = "<group>"; };
 		018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0197F9522A08D9B7006AB7BD /* EntrancePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrancePage.swift; sourceTree = "<group>"; };
+		01CDB6492A0A48E70024E615 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		01CDB64B2A0A49BD0024E615 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +96,10 @@
 		018CCB252A03C1C30007770B /* User */ = {
 			isa = PBXGroup;
 			children = (
+				01CDB64D2A0A4D1C0024E615 /* Login */,
 				018CCB262A03C1E90007770B /* Settings.swift */,
 				018CCB282A03C2260007770B /* UserHomepage.swift */,
 				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
-				018CCB222A03C0420007770B /* UserLogin.swift */,
-				018CCB202A03BFE90007770B /* UserRegister.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -107,6 +110,7 @@
 				018E73002A07E70A00D5017A /* SportRecording.swift */,
 				018E73032A07E76B00D5017A /* RecordCharts.swift */,
 				018E73052A07E78D00D5017A /* RecordDetails.swift */,
+				01CDB6492A0A48E70024E615 /* Sport.swift */,
 				018E73072A07E7B200D5017A /* RecordAnalysis.swift */,
 			);
 			path = Record;
@@ -137,8 +141,9 @@
 			children = (
 				018E73022A07E72000D5017A /* Record */,
 				018CCB252A03C1C30007770B /* User */,
+				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
 				018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */,
-				018EF3B329FA48DE002CC0E1 /* ContentView.swift */,
+				01CDB64B2A0A49BD0024E615 /* Test.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
 				018EF3B729FA48DF002CC0E1 /* Preview Content */,
 			);
@@ -168,6 +173,15 @@
 				018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */,
 			);
 			path = "Sport RecordUITests";
+			sourceTree = "<group>";
+		};
+		01CDB64D2A0A4D1C0024E615 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				018CCB202A03BFE90007770B /* UserRegister.swift */,
+				018CCB222A03C0420007770B /* UserLogin.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,15 +315,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				018CCB292A03C2260007770B /* UserHomepage.swift in Sources */,
+				0197F9532A08D9B7006AB7BD /* EntrancePage.swift in Sources */,
 				018CCB212A03BFE90007770B /* UserRegister.swift in Sources */,
-				018EF3B429FA48DE002CC0E1 /* ContentView.swift in Sources */,
 				018CCB232A03C0420007770B /* UserLogin.swift in Sources */,
 				018E73012A07E70A00D5017A /* SportRecording.swift in Sources */,
 				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
+				01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */,
 				018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */,
 				018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */,
 				018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */,
 				018E72FF2A07E4A500D5017A /* UserInfo.swift in Sources */,
+				01CDB64A2A0A48E70024E615 /* Sport.swift in Sources */,
 				018CCB272A03C1E90007770B /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

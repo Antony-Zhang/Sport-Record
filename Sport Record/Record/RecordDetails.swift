@@ -9,7 +9,10 @@ import SwiftUI
 
 struct RecordDetails: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("单次运动的影像记录")
+            Text("主要数据")
+        }
     }
 }
 
