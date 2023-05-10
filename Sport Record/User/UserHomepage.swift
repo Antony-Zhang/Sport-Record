@@ -50,11 +50,11 @@ struct UserHomepage : View{
     var body: some View{
         NavigationView {
             VStack {
-                NavigationLink(destination: Settings()) {
-                    Text("设置")
-                }
                 NavigationLink(destination: UserInfo()) {
-                    Text("个人信息")
+                    Text("个人信息").font(.title).padding()
+                }
+                NavigationLink(destination: Settings()) {
+                    Text("设置").font(.title).padding()
                 }
             }
             .navigationTitle("个人")  //  使用navigationTitle而不是Text来设置标题

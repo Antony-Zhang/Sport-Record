@@ -41,17 +41,16 @@ struct Settings : View{
 //                    .font(.title)
 //                    .frame(width: 280,alignment: .leading)  // 视图框架大小以及其在框架内的对齐形式
 //                    .padding(.bottom,60)
-
                 VStack{
                     Button("运动单位") {
                         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }
+                    }.font(.title).padding()
                     Button("响铃设置"){
                         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }
+                    }.font(.title).padding()
                     Button("任务计划"){
                         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }
+                    }.font(.title).padding()
                 }
                 .navigationTitle("设置")
 //            }

@@ -8,10 +8,11 @@
 import SwiftUI
 
 @main
+
 struct Sport_RecordApp: App {
     var body: some Scene {
         WindowGroup {
-            UserHomepage()
+            EntrancePage()
         }
     }
 }

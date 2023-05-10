@@ -9,9 +9,9 @@ import SwiftUI
 
 struct EntrancePage: View {
     var body: some View {
-        TabView {
+        TabView {   // 底部导航栏
             Sport().tabItem {
-                Image(systemName: "house")
+                Image(systemName: "figure.run")
                 Text("运动")
             }
             UserHomepage().tabItem {

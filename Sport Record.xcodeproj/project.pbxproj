@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC42A0BB4A40071DCF1 /* Style.swift */; };
 		018CCB212A03BFE90007770B /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB202A03BFE90007770B /* UserRegister.swift */; };
 		018CCB232A03C0420007770B /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB222A03C0420007770B /* UserLogin.swift */; };
 		018CCB272A03C1E90007770B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB262A03C1E90007770B /* Settings.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0154CAC42A0BB4A40071DCF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		018CCB202A03BFE90007770B /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		018CCB222A03C0420007770B /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		018CCB262A03C1E90007770B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -93,13 +95,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0154CAC32A0BA2FD0071DCF1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		018CCB252A03C1C30007770B /* User */ = {
 			isa = PBXGroup;
 			children = (
 				01CDB64D2A0A4D1C0024E615 /* Login */,
+				0154CAC32A0BA2FD0071DCF1 /* Settings */,
 				018CCB262A03C1E90007770B /* Settings.swift */,
-				018CCB282A03C2260007770B /* UserHomepage.swift */,
 				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
+				018CCB282A03C2260007770B /* UserHomepage.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -107,10 +117,10 @@
 		018E73022A07E72000D5017A /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				01CDB6492A0A48E70024E615 /* Sport.swift */,
 				018E73002A07E70A00D5017A /* SportRecording.swift */,
 				018E73032A07E76B00D5017A /* RecordCharts.swift */,
 				018E73052A07E78D00D5017A /* RecordDetails.swift */,
-				01CDB6492A0A48E70024E615 /* Sport.swift */,
 				018E73072A07E7B200D5017A /* RecordAnalysis.swift */,
 			);
 			path = Record;
@@ -143,6 +153,7 @@
 				018CCB252A03C1C30007770B /* User */,
 				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
 				018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */,
+				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
 				01CDB64B2A0A49BD0024E615 /* Test.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
 				018EF3B729FA48DF002CC0E1 /* Preview Content */,
@@ -319,6 +330,7 @@
 				018CCB212A03BFE90007770B /* UserRegister.swift in Sources */,
 				018CCB232A03C0420007770B /* UserLogin.swift in Sources */,
 				018E73012A07E70A00D5017A /* SportRecording.swift in Sources */,
+				0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */,
 				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
 				01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */,
 				018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */,

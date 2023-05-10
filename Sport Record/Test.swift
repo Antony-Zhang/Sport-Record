@@ -14,15 +14,6 @@ struct HomeView: View {
     }
 }
 
-struct SettingsView: View {
-    var body: some View {
-        NavigationView {
-            Text("This is the Settings View")
-                .navigationTitle("Settings")
-        }
-    }
-}
-
 struct DetailView: View {
     var body: some View {
         VStack {
@@ -35,7 +26,16 @@ struct DetailView: View {
     }
 }
 
-struct Previewss: PreviewProvider {
+struct SettingsView: View {
+    var body: some View {
+        NavigationView {
+            Text("This is the Settings View")
+                .navigationTitle("Settings")
+        }
+    }
+}
+
+struct Test_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
         DetailView()
