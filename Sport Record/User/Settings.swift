@@ -7,53 +7,62 @@
 
 import SwiftUI
 
-//struct Settings: View {
-//    var body: some View {
-//        VStack{
-//            Text("设置")
-//                .font(.title)
-//                .frame(width: 280,alignment: .leading)  // 视图框架大小以及其在框架内的对齐形式
-//                .padding(.bottom,60)
-//
-//            VStack{
-//                Button("运动单位") {
-//                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-//                }
-//                Button("响铃设置"){
-//                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-//                }
-//                Button("任务计划"){
-//                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-//                }
-//            }
-//
-//        }.position(x:170,y:100)
-//
-//
-//    }
-//}
-
 struct Settings : View{
+    /*
+     运动单位:双重选择——1⃣️时间上
+     响铃设置:
+     */
+    let UnitOptions = 0...30
+    @State var isEditMode = false
+    @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View{
         NavigationView {
-//            VStack {
-//                Text("设置")
-//                    .font(.title)
-//                    .frame(width: 280,alignment: .leading)  // 视图框架大小以及其在框架内的对齐形式
-//                    .padding(.bottom,60)
+            VStack(alignment: .center){
                 VStack{
-                    Button("运动单位") {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }.font(.title).padding()
-                    Button("响铃设置"){
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }.font(.title).padding()
-                    Button("任务计划"){
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }.font(.title).padding()
+                    Text("运动单位").font(.title).fontWeight(.bold)
+                    if(isEditMode){
+                        
+                    }else{
+                        
+                    }
+                }.padding()
+                VStack{
+                    Text("响铃设置").font(.title).fontWeight(.bold)
+                    if(isEditMode){
+                        
+                    }else{
+                        
+                    }
+                }.padding()
+                VStack{
+                    Text("任务计划").font(.title).fontWeight(.bold)
+                    if(isEditMode){
+                        
+                    }else{
+                        
+                    }
+                }.padding()
+                
+                if(!isEditMode){
+                    Button("修改设置") {
+                        isEditMode = true;
+                    }.padding(.top).buttonStyle(BlueRoundedButton())  // 使用自定义的样式
+                }else{
+                    HStack{
+                        Button("取消") {
+                            isEditMode = false ;
+                        }.padding(.trailing).buttonStyle(RedRoundedButton())
+                        Button("确定") {
+                            
+                            isEditMode = false;
+                        }.padding(.leading).buttonStyle(BlueRoundedButton())
+                    }.padding(.top)
                 }
-                .navigationTitle("设置")
-//            }
+            }.position(x:200,y:220)
+                .navigationTitle("应用设置")
+                // 视图消失后保存设置
+                .onDisappear{userSettings.saveSettings()}
         }
     }
 }

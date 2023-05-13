@@ -35,10 +35,7 @@ struct UserInfo: View {
                         Text("👮昵称:").font(.title2)
                         if(isEditMode){
                             TextField("输入", text: $nameReg) // text是用来存输入字符的变量的引用
-                                .offset(x:15)
-                                .font(.title2)
-                                .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                                .frame(width: 200)
+                                .textFieldStyle(DefualtTextFeild())
                         }else{
                             Text(name).font(.title2).frame(width: 200)
                         }
@@ -47,10 +44,7 @@ struct UserInfo: View {
                         Text("☎️手机:").font(.title2)
                         if(isEditMode){
                             TextField("输入", text: $phoneReg) // text是用来存输入字符的变量
-                                .offset(x:15)
-                                .font(.title2)
-                                .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                                .frame(width: 200)
+                                .textFieldStyle(DefualtTextFeild())
                         }else{
                             Text(phone).font(.title2).frame(width: 200)
                         }
@@ -59,10 +53,7 @@ struct UserInfo: View {
                         Text("🐧扣扣:").font(.title2)
                         if(isEditMode){
                             TextField("输入", text: $qqReg) // text是用来存输入字符的变量
-                                .offset(x:15)
-                                .font(.title2)
-                                .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                                .frame(width: 200)
+                                .textFieldStyle(DefualtTextFeild())
                         }else{
                             Text(qq).font(.title2).frame(width: 200)
                         }
@@ -71,10 +62,7 @@ struct UserInfo: View {
                         Text("🏠地址:").font(.title2)
                         if(isEditMode){
                             TextField("输入", text: $addressReg) // text是用来存输入字符的变量
-                                .offset(x:15)
-                                .font(.title2)
-                                .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                                .frame(width: 200)
+                                .textFieldStyle(DefualtTextFeild())
                         }else{
                             Text(address).font(.title2).frame(width: 200)
                         }
@@ -100,7 +88,7 @@ struct UserInfo: View {
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
                 }
-            }.position(x:200,y:180)
+            }.position(x:200,y:220)
             .navigationTitle("个人信息")
         }
     }

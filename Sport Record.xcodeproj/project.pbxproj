@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC42A0BB4A40071DCF1 /* Style.swift */; };
+		0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */; };
 		018CCB212A03BFE90007770B /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB202A03BFE90007770B /* UserRegister.swift */; };
 		018CCB232A03C0420007770B /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB222A03C0420007770B /* UserLogin.swift */; };
 		018CCB272A03C1E90007770B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB262A03C1E90007770B /* Settings.swift */; };
@@ -17,7 +18,7 @@
 		018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73032A07E76B00D5017A /* RecordCharts.swift */; };
 		018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73052A07E78D00D5017A /* RecordDetails.swift */; };
 		018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E73072A07E7B200D5017A /* RecordAnalysis.swift */; };
-		018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */; };
+		018EF3B229FA48DE002CC0E1 /* MyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3B129FA48DE002CC0E1 /* MyApp.swift */; };
 		018EF3B629FA48DF002CC0E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EF3B529FA48DF002CC0E1 /* Assets.xcassets */; };
 		018EF3B929FA48DF002CC0E1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 018EF3B829FA48DF002CC0E1 /* Preview Assets.xcassets */; };
 		018EF3C329FA48DF002CC0E1 /* Sport_RecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3C229FA48DF002CC0E1 /* Sport_RecordTests.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		0154CAC42A0BB4A40071DCF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettings.swift; sourceTree = "<group>"; };
 		018CCB202A03BFE90007770B /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		018CCB222A03C0420007770B /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		018CCB262A03C1E90007770B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -57,7 +59,7 @@
 		018E73052A07E78D00D5017A /* RecordDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetails.swift; sourceTree = "<group>"; };
 		018E73072A07E7B200D5017A /* RecordAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAnalysis.swift; sourceTree = "<group>"; };
 		018EF3AE29FA48DE002CC0E1 /* Sport Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sport Record.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordApp.swift; sourceTree = "<group>"; };
+		018EF3B129FA48DE002CC0E1 /* MyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApp.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		018EF3B529FA48DF002CC0E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		018EF3B829FA48DF002CC0E1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		018EF3BE29FA48DF002CC0E1 /* Sport RecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sport RecordTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,21 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0154CAC32A0BA2FD0071DCF1 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		018CCB252A03C1C30007770B /* User */ = {
 			isa = PBXGroup;
 			children = (
-				01CDB64D2A0A4D1C0024E615 /* Login */,
-				0154CAC32A0BA2FD0071DCF1 /* Settings */,
-				018CCB262A03C1E90007770B /* Settings.swift */,
-				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
 				018CCB282A03C2260007770B /* UserHomepage.swift */,
+				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
+				0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */,
+				018CCB262A03C1E90007770B /* Settings.swift */,
+				01CDB64D2A0A4D1C0024E615 /* Login */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -152,7 +147,7 @@
 				018E73022A07E72000D5017A /* Record */,
 				018CCB252A03C1C30007770B /* User */,
 				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
-				018EF3B129FA48DE002CC0E1 /* Sport_RecordApp.swift */,
+				018EF3B129FA48DE002CC0E1 /* MyApp.swift */,
 				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
 				01CDB64B2A0A49BD0024E615 /* Test.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
@@ -333,7 +328,8 @@
 				0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */,
 				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
 				01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */,
-				018EF3B229FA48DE002CC0E1 /* Sport_RecordApp.swift in Sources */,
+				0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */,
+				018EF3B229FA48DE002CC0E1 /* MyApp.swift in Sources */,
 				018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */,
 				018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */,
 				018E72FF2A07E4A500D5017A /* UserInfo.swift in Sources */,

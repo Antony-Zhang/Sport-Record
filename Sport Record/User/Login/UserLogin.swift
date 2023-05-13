@@ -22,24 +22,19 @@ struct UserLogin: View {
             HStack {
                 Text("用户名:").font(.system(size:25))
                 TextField("输入用户名", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)// text是用来存输入字符的变量
-                    .offset(x:15)
-                    .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                    .frame(width: 250)
+                    .textFieldStyle(DefualtTextFeild())
             }
             
             HStack {
                 Text("密    码:").font(.system(size:25))
                 TextField("输入密码", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/) // text是用来存输入字符的变量
-                    .offset(x:15)
-                    .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                    .frame(width: 250)
+                    .textFieldStyle(DefualtTextFeild())
             }
             
             
             Button("登录") {
                 /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-            }.foregroundColor(.black)
-                .padding(15)
+            }.buttonStyle(BlueRoundedButton())
                 
             
         }.position(x:200,y:200) // 相对于父视图左上角的的位置

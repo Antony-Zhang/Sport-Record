@@ -38,3 +38,14 @@ struct RedRoundedButton: ButtonStyle {
             )
     }
 }
+
+// 输入框样式
+struct DefualtTextFeild: TextFieldStyle{
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .offset(x:15)
+            .font(.title2)
+            .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
+            .frame(width: 200)
+    }
+}

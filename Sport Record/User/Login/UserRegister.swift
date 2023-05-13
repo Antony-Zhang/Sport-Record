@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct UserRegister: View {
+//    @State var id = 
     var body: some View {
         VStack {
             Text("用户注册")
@@ -22,35 +21,28 @@ struct UserRegister: View {
                 .padding(30)
             
             HStack {
-                Text(" 用 户 名: ").font(.system(size:25))
+                Text(" 用 户 名: ").font(.title2)
                 TextField("输入用户名", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)// text是用来存输入字符的变量
-                    .offset(x:15)
-                    .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                    .frame(width: 250)
+                    .textFieldStyle(DefualtTextFeild())
             }.padding(10)
             
             HStack {
-                Text("密       码: ").font(.system(size:25))
+                Text("密       码: ").font(.title2)
                 TextField("输入密码", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/) // text是用来存输入字符的变量
-                    .offset(x:15)
-                    .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                    .frame(width: 250)
+                    .textFieldStyle(DefualtTextFeild())
             }.padding(10)
             
             HStack {
-                Text("确认密码:").font(.system(size:25))
+                Text("确认密码:").font(.title2)
                 TextField("再次输入密码", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/) // text是用来存输入字符的变量
-                    .offset(x:15)
-                    .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                    .frame(width: 250)
+                    .textFieldStyle(DefualtTextFeild())
             }.padding(10)
             
             Button("注册") {
                 
             }
-            .padding(5)
-            .foregroundColor(.black)
-            .fontWeight(.bold)
+            .padding(.top)
+            .buttonStyle(BlueRoundedButton())
             
         }.position(x:200,y:200) // 相对于父视图左上角的的位置
         //.offset(y:-100)   // 在当前位置基础上的偏移

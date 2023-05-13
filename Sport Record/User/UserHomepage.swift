@@ -50,13 +50,30 @@ struct UserHomepage : View{
     var body: some View{
         NavigationView {
             VStack {
+                HStack(alignment: .center){
+                    Image("logo").resizable()    // 修饰符,使Image对象大小可随意调整
+                        .frame(width: 80,height: 80)
+                        //   .scaledToFit()
+                        //   .scaleEffect(0.25) //设置缩放比例
+                        .clipShape(Circle())    // 裁剪图像边框形状
+                    
+                    VStack(alignment: .leading){
+                        Text("Fishead_East").font(.title2)
+                        Text("ID:  "+"ytzd2696").foregroundColor(.gray)
+                    }
+                }
+                .padding(.bottom, 30.0)
+                
                 NavigationLink(destination: UserInfo()) {
                     Text("个人信息").font(.title).padding()
                 }
-                NavigationLink(destination: Settings()) {
-                    Text("设置").font(.title).padding()
+                NavigationLink(destination: AccountSettings()) {
+                    Text("账号设置").font(.title).padding()
                 }
-            }
+                NavigationLink(destination: Settings()) {
+                    Text("应用设置").font(.title).padding()
+                }
+            }.position(x:200,y:220)
             .navigationTitle("个人")  //  使用navigationTitle而不是Text来设置标题
         }
     }
