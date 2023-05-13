@@ -47,6 +47,9 @@ import SwiftUI
 //}
 
 struct UserHomepage : View{
+    @EnvironmentObject var dataBase :SQLiteDatabase
+    @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View{
         NavigationView {
             VStack {
@@ -67,10 +70,10 @@ struct UserHomepage : View{
                 NavigationLink(destination: UserInfo()) {
                     Text("个人信息").font(.title).padding()
                 }
-                NavigationLink(destination: AccountSettings()) {
+                NavigationLink(destination: AccountSettings().environmentObject(dataBase)) {
                     Text("账号设置").font(.title).padding()
                 }
-                NavigationLink(destination: Settings()) {
+                NavigationLink(destination: Settings().environmentObject(userSettings)) {
                     Text("应用设置").font(.title).padding()
                 }
             }.position(x:200,y:220)
@@ -81,6 +84,7 @@ struct UserHomepage : View{
 
 struct UserHomepage_Previews: PreviewProvider {
     static var previews: some View {
-        UserHomepage()
+        UserHomepage().environmentObject(SQLiteDatabase.shared)
+            .environmentObject(UserSettings.shared)
     }
 }

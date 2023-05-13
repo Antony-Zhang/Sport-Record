@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AccountSettings: View {
+    @EnvironmentObject var dataBase :SQLiteDatabase
+    
     @State var isEditMode = true
     @State var n = ""
     
@@ -35,6 +37,6 @@ struct AccountSettings: View {
 
 struct AccountSettings_Previews: PreviewProvider {
     static var previews: some View {
-        AccountSettings()
+        AccountSettings().environmentObject(SQLiteDatabase.shared)
     }
 }
