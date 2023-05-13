@@ -56,40 +56,6 @@ struct Settings : View{
                 // 视图消失后保存设置
                 .onDisappear{userSettings.saveSettings()}
                 
-//                VStack{
-//                    Text("运动单位").font(.title)
-//                        .fontWeight(.bold)
-//                        .padding()
-//                    if(isEditMode){
-//                        Picker("Select a number", selection: $unitsSelect) {
-//                            ForEach(UnitsOptions, id: \.self) {
-//                                op in Text("\(op)")
-//                            }
-//                        }
-//                        .pickerStyle(DefaultPickerStyle())
-//                    }else{
-//
-//                    }
-//                }.padding()
-//                VStack{
-//                    Text("响铃设置").font(.title)
-//                        .fontWeight(.bold)
-//                    if(isEditMode){
-//
-//                    }else{
-//
-//                    }
-//                }.padding()
-//                VStack{
-//                    Text("任务计划").font(.title)
-//                        .fontWeight(.bold)
-//                    if(isEditMode){
-//
-//                    }else{
-//
-//                    }
-//                }.padding()
-//
 //                if(!isEditMode){
 //                    Button("修改设置") {
 //                        isEditMode = true;

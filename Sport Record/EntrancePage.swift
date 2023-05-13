@@ -16,12 +16,15 @@ struct EntrancePage: View {
     var body: some View {
         TabView {   // 底部导航栏
             Sport().tabItem {
-                Image(systemName: "figure.run")
+                Image(systemName: "figure.jumprope")
                 Text("运动")
             }
-            UserHomepage().tabItem {
-                Image(systemName: "person")
-                Text("个人")
+            UserHomepage()
+                .environmentObject(dataBase)
+                .environmentObject(userSettings)
+                .tabItem {
+                Image(systemName: "person.circle")
+                Text("用户")
             }
         }
     }
@@ -29,6 +32,7 @@ struct EntrancePage: View {
 
 struct EntrancePage_Previews: PreviewProvider {
     static var previews: some View {
-        EntrancePage()
+        EntrancePage().environmentObject(SQLiteDatabase.shared)
+            .environmentObject(UserSettings.shared)
     }
 }

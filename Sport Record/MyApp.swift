@@ -10,7 +10,8 @@ import SQLite3
 
 @main
 struct MyApp: App {
-    @StateObject var userSettings = UserSettings()      //  设置信息
+    //  单例数据对象
+    @StateObject var userSettings = UserSettings.shared      //  设置信息
     @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
     
     var body: some Scene {
@@ -18,9 +19,15 @@ struct MyApp: App {
             //  根视图
             EntrancePage().environmentObject(dataBase)  //  传入数据库对象
                 .environmentObject(userSettings)        //  传入设置对象
-            
         }
     }
+}
+
+// 用户模型
+struct User {
+    let id: Int32
+    let name: String
+    let age: Int
 }
 
 //// 保存用户数据
@@ -35,36 +42,44 @@ struct MyApp: App {
 //    var qq: String!
 //}
 
-//  用户设置类
+
+//  用户设置类 [单例模式]
 class UserSettings :ObservableObject{
-//    @Published var userData = Userdata()
-    @Published var backgroundColor: Color = .white
-    @Published var fontSize: CGFloat = 12.0
-    @Published var showTutorial: Bool = true
+//    @Published var backgroundColor: Color = .white
+//    @Published var fontSize: CGFloat = 12.0
+//    @Published var showTutorial: Bool = true
+    static let shared = UserSettings()  //  唯一单例
     
-//    @Published var sportUnit  //  运动单位
-//    @Published var ring       //  响铃设置
-//    @Published var plan       //  运动计划
+    @Published var sportUnits: Int32 = 1  //  运动单位(min)
+    @Published var ring: String = "Music1"       //  响铃设置
+    @Published var plan: Int32 = 1       //  运动计划(天)
     
     let userDefaults = UserDefaults.standard
     
     //  读取设置
-    init() {
-        backgroundColor = Color(userDefaults.string(forKey: "backgroundColor") ?? "white")
-        fontSize = CGFloat(userDefaults.float(forKey: "fontSize"))
-        showTutorial = userDefaults.bool(forKey: "showTutorial")
+    private init() {
+        sportUnits = Int32(userDefaults.integer(forKey: "sportUnits"))
+        ring = userDefaults.string(forKey: "ring") ?? "Music1"
+        plan = Int32(userDefaults.integer(forKey: "plan"))
+//        backgroundColor = Color(userDefaults.string(forKey: "backgroundColor") ?? "white")
+//        fontSize = CGFloat(userDefaults.float(forKey: "fontSize"))
+//        showTutorial = userDefaults.bool(forKey: "showTutorial")
     }
+    
     //  保存设置
     func saveSettings() {
-        userDefaults.set(backgroundColor.description, forKey: "backgroundColor")
-        userDefaults.set(Float(fontSize), forKey: "fontSize")
-        userDefaults.set(showTutorial, forKey: "showTutorial")
+        userDefaults.set(sportUnits, forKey: "sportUnits")
+        userDefaults.set(ring, forKey: "ring")
+        userDefaults.set(plan, forKey: "plan")
+//        userDefaults.set(backgroundColor.description, forKey: "backgroundColor")
+//        userDefaults.set(Float(fontSize), forKey: "fontSize")
+//        userDefaults.set(showTutorial, forKey: "showTutorial")
     }
 }
 
-// SQLite3数据库管理类
+// SQLite3数据库管理类 [单例模式]
 class SQLiteDatabase: ObservableObject {
-    static let shared = SQLiteDatabase()
+    static let shared = SQLiteDatabase()    //  单例
     
     private var dbPointer: OpaquePointer?   // 指针
     
@@ -131,9 +146,4 @@ class SQLiteDatabase: ObservableObject {
     }
 }
 
-// 用户模型
-struct User {
-    let id: Int32
-    let name: String
-    let age: Int
-}
+
