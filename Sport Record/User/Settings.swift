@@ -31,8 +31,8 @@ struct Settings : View{
             Form {
                 Section(header: Text("单次运动的单位")) {
                     Picker(selection: $unitsSelect, label: Text("运动单位(min)")) {
-                        ForEach(0 ..< UnitsOptions.count) { index in
-                            Text(String(self.UnitsOptions[index])).tag(index)
+                        ForEach(UnitsOptions,id: \.self) { index in
+                            Text("\(index)")
                         }
                     }
                 }
@@ -44,9 +44,9 @@ struct Settings : View{
                     }
                 }
                 Section(header: Text("前后两次运动的间隔")) {
-                    Picker(selection: $unitsSelect, label: Text("任务计划")) {
-                        ForEach(0 ..< PlanOptions.count) {
-                            op in Text("\(op)")
+                    Picker(selection: $unitsSelect, label: Text("任务计划(天)")) {
+                        ForEach(PlanOptions,id: \.self) { index in
+                            Text("\(index)")
                         }
                     }
                 }
