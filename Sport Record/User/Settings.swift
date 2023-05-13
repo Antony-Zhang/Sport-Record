@@ -18,9 +18,9 @@ struct Settings : View{
     
     @State var isEditMode = true
     // 选择选项的[索引]
-    @State private var unitsSelect = 0
-    @State private var ringSelect = 0
-    @State private var planSelect = 0
+//    @State private var unitsSelect = 0
+//    @State private var ringSelect = ""
+//    @State private var planSelect = 0
     
     let UnitsOptions = Array(1...30)
     let RingOptions = ["Music1","Music2","Music3"]
@@ -30,21 +30,21 @@ struct Settings : View{
         NavigationView {
             Form {
                 Section(header: Text("单次运动的单位")) {
-                    Picker(selection: $unitsSelect, label: Text("运动单位(min)")) {
+                    Picker(selection: $userSettings.sportUnits, label: Text("运动单位(min)")) {
                         ForEach(UnitsOptions,id: \.self) { index in
-                            Text("\(index)")
+                            Text("\(index)").tag(index)
                         }
                     }
                 }
                 Section(header: Text("运动结束后的铃声")) {
-                    Picker(selection: $unitsSelect, label: Text("响铃设置")) {
+                    Picker(selection: $userSettings.ring, label: Text("响铃设置")) {
                         ForEach(RingOptions,id: \.self){    // id为自身
                             Text($0)    // $0指代闭包中的第一个参数,此处就是RingOptions的每一个元素
                         }
                     }
                 }
                 Section(header: Text("前后两次运动的间隔")) {
-                    Picker(selection: $unitsSelect, label: Text("任务计划(天)")) {
+                    Picker(selection: $userSettings.plan, label: Text("任务计划(天)")) {
                         ForEach(PlanOptions,id: \.self) { index in
                             Text("\(index)")
                         }
@@ -55,29 +55,12 @@ struct Settings : View{
                 .navigationTitle("应用设置")
                 // 视图消失后保存设置
                 .onDisappear{userSettings.saveSettings()}
-                
-//                if(!isEditMode){
-//                    Button("修改设置") {
-//                        isEditMode = true;
-//                    }.padding(.top).buttonStyle(BlueRoundedButton())  // 使用自定义的样式
-//                }else{
-//                    HStack{
-//                        Button("取消") {
-//                            isEditMode = false ;
-//                        }.padding(.trailing).buttonStyle(RedRoundedButton())
-//                        Button("确定") {
-//
-//                            isEditMode = false;
-//                        }.padding(.leading).buttonStyle(BlueRoundedButton())
-//                    }.padding(.top)
-//                }
         }
     }
 }
 
-
 struct Settings_Previews: PreviewProvider {
     static var previews: some View {
-        Settings()
+        Settings().environmentObject(UserSettings.shared)
     }
 }
