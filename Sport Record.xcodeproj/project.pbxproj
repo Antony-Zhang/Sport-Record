@@ -67,7 +67,7 @@
 		018EF3C829FA48DF002CC0E1 /* Sport RecordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sport RecordUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018EF3CC29FA48DF002CC0E1 /* Sport_RecordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordUITests.swift; sourceTree = "<group>"; };
 		018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0197F9522A08D9B7006AB7BD /* EntrancePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrancePage.swift; sourceTree = "<group>"; };
+		0197F9522A08D9B7006AB7BD /* EntrancePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrancePage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		01CDB6492A0A48E70024E615 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		01CDB64B2A0A49BD0024E615 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
