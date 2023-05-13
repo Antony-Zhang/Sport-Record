@@ -50,17 +50,17 @@ class UserSettings :ObservableObject{
 //    @Published var showTutorial: Bool = true
     static let shared = UserSettings()  //  唯一单例
     
-    @Published var sportUnits: Int32 = 1  //  运动单位(min)
+    @Published var sportUnits: Int = 1  //  运动单位(min)
     @Published var ring: String = "Music1"       //  响铃设置
-    @Published var plan: Int32 = 1       //  运动计划(天)
+    @Published var plan: Int = 1       //  运动计划(天)
     
     let userDefaults = UserDefaults.standard
     
     //  读取设置
     private init() {
-        sportUnits = Int32(userDefaults.integer(forKey: "sportUnits"))
+        sportUnits = Int(userDefaults.integer(forKey: "sportUnits"))
         ring = userDefaults.string(forKey: "ring") ?? "Music1"
-        plan = Int32(userDefaults.integer(forKey: "plan"))
+        plan = Int(userDefaults.integer(forKey: "plan"))
 //        backgroundColor = Color(userDefaults.string(forKey: "backgroundColor") ?? "white")
 //        fontSize = CGFloat(userDefaults.float(forKey: "fontSize"))
 //        showTutorial = userDefaults.bool(forKey: "showTutorial")
