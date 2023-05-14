@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecordCharts: View {
     var body: some View {
-        Text("历史运动记录")
+        Text("个人历史运动记录")
     }
 }
 

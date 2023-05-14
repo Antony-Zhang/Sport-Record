@@ -21,55 +21,57 @@ struct UserInfo: View {
     
     
     var body: some View {
-        NavigationView(){
-            VStack(alignment: .center){
+//        NavigationView(){     //  会使页面切换时下偏,但从主页面开始调试时、标题会出现
+        Form(){
+            HStack{
+                Text("头像").font(.title2)
+                Spacer()
                 Image(logo).resizable()    // 修饰符,使Image对象大小可随意调整
-                    .frame(width: 100,height: 100)
-                    //   .scaledToFit()
-                    //   .scaleEffect(0.25) //设置缩放比例
+                    .frame(width: 60,height: 60)
+                //   .scaledToFit()
+                //   .scaleEffect(0.25) //设置缩放比例
                     .clipShape(Circle())    // 裁剪图像边框形状
-                    .padding(.top)
-                
-                VStack(alignment: .leading){
-                    HStack{
-                        Text("👮昵称:").font(.title2)
-                        if(isEditMode){
-                            TextField("输入", text: $nameReg) // text是用来存输入字符的变量的引用
-                                .textFieldStyle(DefualtTextFeild())
-                        }else{
-                            Text(name).font(.title2).frame(width: 200)
-                        }
-                    }.frame(height: 40)
-                    HStack{
-                        Text("☎️手机:").font(.title2)
-                        if(isEditMode){
-                            TextField("输入", text: $phoneReg) // text是用来存输入字符的变量
-                                .textFieldStyle(DefualtTextFeild())
-                        }else{
-                            Text(phone).font(.title2).frame(width: 200)
-                        }
-                    }.frame(height: 40)
-                    HStack{
-                        Text("🐧扣扣:").font(.title2)
-                        if(isEditMode){
-                            TextField("输入", text: $qqReg) // text是用来存输入字符的变量
-                                .textFieldStyle(DefualtTextFeild())
-                        }else{
-                            Text(qq).font(.title2).frame(width: 200)
-                        }
-                    }.frame(height: 40)
-                    HStack{
-                        Text("🏠地址:").font(.title2)
-                        if(isEditMode){
-                            TextField("输入", text: $addressReg) // text是用来存输入字符的变量
-                                .textFieldStyle(DefualtTextFeild())
-                        }else{
-                            Text(address).font(.title2).frame(width: 200)
-                        }
-                    }.frame(height: 40)
+                    
+            }
+            HStack{
+                Text("👤昵称:").font(.title2)
+                if(isEditMode){
+                    TextField("输入", text: $nameReg) // text是用来存输入字符的变量的引用
+                        .textFieldStyle(DefualtTextFeild())
+                }else{
+                    Text(name).font(.title2).frame(width: 200)
                 }
-                .padding(.bottom)
-                
+            }.frame(height: 40)
+            HStack{
+                Text("☎️手机:").font(.title2)
+                if(isEditMode){
+                    TextField("输入", text: $phoneReg) // text是用来存输入字符的变量
+                        .textFieldStyle(DefualtTextFeild())
+                }else{
+                    Text(phone).font(.title2).frame(width: 200)
+                }
+            }.frame(height: 40)
+            HStack{
+                Text("🐧扣扣:").font(.title2)
+                if(isEditMode){
+                    TextField("输入", text: $qqReg) // text是用来存输入字符的变量
+                        .textFieldStyle(DefualtTextFeild())
+                }else{
+                    Text(qq).font(.title2).frame(width: 200)
+                }
+            }.frame(height: 40)
+            HStack{
+                Text("🏠地址:").font(.title2)
+                if(isEditMode){
+                    TextField("输入", text: $addressReg) // text是用来存输入字符的变量
+                        .textFieldStyle(DefualtTextFeild())
+                }else{
+                    Text(address).font(.title2).frame(width: 200)
+                }
+            }.frame(height: 40)
+            
+            HStack{
+                Spacer()
                 if(!isEditMode){
                     Button("修改信息") {
                         isEditMode = true;
@@ -88,9 +90,12 @@ struct UserInfo: View {
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
                 }
-            }.position(x:200,y:220)
-            .navigationTitle("个人信息")
+                Spacer()
+            }
         }
+            .navigationTitle("个人信息")
+        
+//        }
     }
 }
 

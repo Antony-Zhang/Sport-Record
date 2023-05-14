@@ -10,7 +10,7 @@ import SwiftUI
 struct EntrancePage: View {
     //  引入数据库对象
     @EnvironmentObject var dataBase :SQLiteDatabase
-    //  引入设置数据对象
+    //  引入设置对象
     @EnvironmentObject var userSettings :UserSettings
     
     var body: some View {

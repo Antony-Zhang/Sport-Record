@@ -27,24 +27,24 @@ struct Settings : View{
     let PlanOptions = Array(1...3)
     
     var body: some View{
-        NavigationView {
+//        NavigationView {
             Form {
                 Section(header: Text("单次运动的单位")) {
-                    Picker(selection: $userSettings.sportUnits, label: Text("运动单位(min)")) {
+                    Picker(selection: $userSettings.sportUnits, label: Text("运动单位(min)").font(.title3)) {
                         ForEach(UnitsOptions,id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
                 }
                 Section(header: Text("运动结束后的铃声")) {
-                    Picker(selection: $userSettings.ring, label: Text("响铃设置")) {
+                    Picker(selection: $userSettings.ring, label: Text("响铃设置").font(.title3)) {
                         ForEach(RingOptions,id: \.self){    // id为自身
                             Text($0)    // $0指代闭包中的第一个参数,此处就是RingOptions的每一个元素
                         }
                     }
                 }
                 Section(header: Text("前后两次运动的间隔")) {
-                    Picker(selection: $userSettings.plan, label: Text("任务计划(天)")) {
+                    Picker(selection: $userSettings.plan, label: Text("任务计划(天)").font(.title3)) {
                         ForEach(PlanOptions,id: \.self) { index in
                             Text("\(index)")
                         }
@@ -55,7 +55,7 @@ struct Settings : View{
                 .navigationTitle("应用设置")
                 // 视图消失后保存设置
                 .onDisappear{userSettings.saveSettings()}
-        }
+//        }
     }
 }
 

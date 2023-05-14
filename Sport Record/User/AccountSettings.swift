@@ -14,29 +14,35 @@ struct AccountSettings: View {
     @State var n = ""
     
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack{
-                    Text("👮昵称:").font(.title2)
-                    if(isEditMode){
-                        TextField("输入", text: $n) // text是用来存输入字符的变量的引用
-                            .offset(x:15)
-                            .font(.title2)
-                            .overlay(RoundedRectangle(cornerRadius: 3).stroke(Color.gray,lineWidth:1))
-                            .frame(width: 200)
-                    }else{
-                        Text("").font(.title2).frame(width: 200)
+//        NavigationView {
+            Form() {
+                HStack(alignment: .center){
+                    Image("logo").resizable()    // 修饰符,使Image对象大小可随意调整
+                        .frame(width: 100,height: 100)
+                        //   .scaledToFit()
+                        //   .scaleEffect(0.25) //设置缩放比例
+                        .clipShape(Circle())    // 裁剪图像边框形状
+                    
+                    VStack(alignment: .leading){
+                        Text("Fishead_East").font(.title)
+                        Text("ID:  "+"ytzd2696").font(.title2)
+                            .foregroundColor(.gray)
                     }
-                }.frame(height: 40)
-                
-            }.position(x:200,y:220)
-            .navigationTitle("账号设置")  //  使用navigationTitle而不是Text来设置标题
+                }.padding()
+                Section{
+                    Button("修改密码") {
+                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    }.font(.title).foregroundColor(.black).padding()
+                    Button("退出账号") {
+                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                    }.font(.title).foregroundColor(.red).padding()
+                }
+            }.navigationTitle("账号设置")  //  使用navigationTitle而不是Text来设置标题
+//        }
+    }
+}
+    struct AccountSettings_Previews: PreviewProvider {
+        static var previews: some View {
+            AccountSettings().environmentObject(SQLiteDatabase.shared)
         }
     }
-}
-
-struct AccountSettings_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountSettings().environmentObject(SQLiteDatabase.shared)
-    }
-}

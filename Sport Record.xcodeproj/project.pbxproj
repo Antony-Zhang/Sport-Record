@@ -102,9 +102,9 @@
 			children = (
 				018CCB282A03C2260007770B /* UserHomepage.swift */,
 				018E72FE2A07E4A500D5017A /* UserInfo.swift */,
+				018E73032A07E76B00D5017A /* RecordCharts.swift */,
 				0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */,
 				018CCB262A03C1E90007770B /* Settings.swift */,
-				01CDB64D2A0A4D1C0024E615 /* Login */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -114,7 +114,6 @@
 			children = (
 				01CDB6492A0A48E70024E615 /* Sport.swift */,
 				018E73002A07E70A00D5017A /* SportRecording.swift */,
-				018E73032A07E76B00D5017A /* RecordCharts.swift */,
 				018E73052A07E78D00D5017A /* RecordDetails.swift */,
 				018E73072A07E7B200D5017A /* RecordAnalysis.swift */,
 			);
@@ -146,6 +145,7 @@
 			children = (
 				018E73022A07E72000D5017A /* Record */,
 				018CCB252A03C1C30007770B /* User */,
+				01CDB64D2A0A4D1C0024E615 /* Login */,
 				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
 				018EF3B129FA48DE002CC0E1 /* MyApp.swift */,
 				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
