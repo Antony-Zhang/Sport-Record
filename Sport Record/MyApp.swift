@@ -52,6 +52,21 @@ class UserSettings :ObservableObject{
     }
 }
 
+// 用户信息结构体
+struct Info {
+    var id: String!
+    var username: String!
+    var phone: String!
+    var address: String!
+    var qq: String!
+}
+//  运动数据结构体 !!!! 暂且使用String
+struct SportData{
+    var id: String!
+    var dateTime: String!
+    var consumTIme: String!
+    var checkImage: String!
+}
 
 // SQLite3数据库管理类 [单例模式]
 class SQLiteDatabase: ObservableObject {
@@ -112,7 +127,9 @@ class SQLiteDatabase: ObservableObject {
             print("运动数据表创建失败: \(errmsg)")
         }
     }
-    //  新建用户
+    
+    /*   账户信息   */
+    //  新建账户
     func addUser(id: String, password: String){
         let insertUserQuery = "INSERT INTO Users (id, password) VALUES (?, ?);"
         var statement: OpaquePointer?
@@ -132,7 +149,71 @@ class SQLiteDatabase: ObservableObject {
         }
         sqlite3_finalize(statement)
     }
-    //  更新用户数据
+    //  查询账户密码
+    func getUser() -> String{
+        let getUserQuery = "SELECT password FROM Users WHERE id = ?"
+        var password = ""
+        var statement: OpaquePointer?
+        //  将String转化为SQLite语句对象并编译
+        if sqlite3_prepare_v2(dbPointer, getUserQuery, -1, &statement, nil) == SQLITE_OK{
+            //  填充SQLite语句中的参数
+            sqlite3_bind_text(statement, 1, SQLiteDatabase.id, -1, nil)
+            //  执行语句
+            if sqlite3_step(statement) == SQLITE_ROW{
+                password = String(cString: sqlite3_column_text(statement, 0))
+            }
+        }else{
+            let errmsg = String(cString: sqlite3_errmsg(dbPointer))
+            print("查询账户密码语句组织失败: \(errmsg)")
+        }
+        sqlite3_finalize(statement)
+        return password
+    }
+    //  更新密码
+    func updateUser(password: String){
+        let updateUserQuery = "UPDATE Users SET password = ?"
+        var statement: OpaquePointer?
+        if sqlite3_prepare_v2(dbPointer, updateUserQuery, -1, &statement, nil) == SQLITE_OK{
+            sqlite3_bind_text(statement, 1, password, -1, nil)
+            //   执行语句
+            if sqlite3_step(statement) != SQLITE_DONE{
+                let errmsg = String(cString: sqlite3_errmsg(dbPointer))
+                print("账户密码更新失败: \(errmsg)")
+            }
+        }else{
+            let errmsg = String(cString: sqlite3_errmsg(dbPointer))
+            print("账户密码更新语句组织失败: \(errmsg)")
+        }
+        sqlite3_finalize(statement)
+    }
+    
+    /*   用户信息   */
+    //  查询用户信息
+    func getUserInfo() -> Info {
+        let getUserInfoQuery = "SELECT * FROM UserInfo WHERE id=?"
+        var userInfo = Info()
+        var statement: OpaquePointer?
+        //  将String转化为SQLite语句对象并编译
+        if sqlite3_prepare_v2(dbPointer, getUserInfoQuery, -1, &statement, nil) == SQLITE_OK{
+            //  填充SQLite语句中的参数
+            sqlite3_bind_text(statement, 1, SQLiteDatabase.id, -1, nil)
+            //  执行语句
+            if sqlite3_step(statement) == SQLITE_ROW{
+                //  !!!!暂且
+                userInfo.id = String(cString: sqlite3_column_text(statement, 0))
+                userInfo.username = String(cString: sqlite3_column_text(statement, 1))
+                userInfo.phone = String(cString: sqlite3_column_text(statement, 2))
+                userInfo.address = String(cString: sqlite3_column_text(statement, 3))
+                userInfo.qq = String(cString: sqlite3_column_text(statement, 4))
+            }
+        }else{
+            let errmsg = String(cString: sqlite3_errmsg(dbPointer))
+            print("查询用户信息语句组织失败: \(errmsg)")
+        }
+        sqlite3_finalize(statement)
+        return userInfo
+    }
+    //  更新用户信息
     func updateUserInfo(username: String, phone: String, address: String, qq: String){
         let updateUserInfoQuery = (ExitOrNot(table: "UserINfo")) ?
             "UPDATE UserInfo SET username = ?, phone = ?, address = ?, qq = ? WHERE id = ?;" :
@@ -157,9 +238,34 @@ class SQLiteDatabase: ObservableObject {
             print("用户信息更新语句组织失败: \(errmsg)")
         }
         sqlite3_finalize(statement)
-        
     }
-    //  保存运动数据 !!!! 此处暂且选择String数据类型
+    
+    /*   运动数据   */
+    //   查询运动数据 !!!!暂且
+    func getSportData() -> SportData{
+        let getSportDataQuery = "SELECT * FROM SportData WHERE id = ?"
+        var sportData = SportData()
+        var statement: OpaquePointer?
+        //  将String转化为SQLite语句对象并编译
+        if sqlite3_prepare_v2(dbPointer, getSportDataQuery, -1, &statement, nil) == SQLITE_OK{
+            //  填充SQLite语句中的参数
+            sqlite3_bind_text(statement, 1, SQLiteDatabase.id, -1, nil)
+            //  执行语句
+            if sqlite3_step(statement) == SQLITE_ROW{
+                //  !!!!暂且
+                sportData.id = String(cString: sqlite3_column_text(statement, 0))
+                sportData.dateTime = String(cString: sqlite3_column_text(statement, 1))
+                sportData.consumTIme = String(cString: sqlite3_column_text(statement, 2))
+                sportData.checkImage = String(cString: sqlite3_column_text(statement, 3))
+            }
+        }else{
+            let errmsg = String(cString: sqlite3_errmsg(dbPointer))
+            print("查询用户信息语句组织失败: \(errmsg)")
+        }
+        sqlite3_finalize(statement)
+        return sportData
+    }
+    //  保存运动数据 !!!! 暂且选择String数据类型
     func saveSportData(dateTime: String, consumTime: String, checkImage: String){
         let saveSportDataQuery = "INSERT INTO SportData(id, dataTime, consumTime, checkTime) VALUES(?, ?, ?, ?);"
         var statement: OpaquePointer?
@@ -198,29 +304,4 @@ class SQLiteDatabase: ObservableObject {
         }
         return false
     }
-    
-//    // 查询所有用户数据
-//    func getUsers() -> [User] {
-//        var users: [User] = []
-//        let query = "SELECT * FROM Users;"
-//        var statement: OpaquePointer?
-//        if sqlite3_prepare_v2(dbPointer, query, -1, &statement, nil) == SQLITE_OK {
-//            while sqlite3_step(statement) == SQLITE_ROW {
-//                let id = String(cString: sqlite3_column_text(statement, 0))
-//                let username = String(cString: sqlite3_column_text(statement, 1))
-//                let password = String(cString: sqlite3_column_text(statement, 3))
-//                let phone = String(cString: sqlite3_column_text(statement, 4))
-//                let address = String(cString: sqlite3_column_text(statement, 5))
-//                let qq = String(cString: sqlite3_column_text(statement, 6))
-//                users.append(User(id: id, username: username, password: password, phone: phone, address: address, qq: qq))
-//            }
-//        } else {
-//            let errmsg = String(cString: sqlite3_errmsg(dbPointer))
-//            print("error preparing statement: \(errmsg)")
-//        }
-//        sqlite3_finalize(statement)
-//        return users
-//    }
 }
-
-
