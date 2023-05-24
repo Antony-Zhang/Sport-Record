@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct UserInfo: View {
+    @StateObject var userSettings = UserSettings.shared      //  设置信息
+    @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
+    
     @State var isEditMode = false;  // 修改状态
     @State var logo = "logo"
+    
     @State var name = "无"
     @State var phone = "无"
     @State var qq = "无"
