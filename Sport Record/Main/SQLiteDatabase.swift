@@ -29,7 +29,6 @@ struct SportData{
 // SQLite3数据库管理类 [单例模式]
 class SQLiteDatabase: ObservableObject {
     static let shared = SQLiteDatabase()    //  单例
-    static var id = "ytzd"     //  当前用户的id
     private var dbPointer: OpaquePointer?   // 指针
     
     //  用户账号表
@@ -78,14 +77,20 @@ class SQLiteDatabase: ObservableObject {
         if sqlite3_exec(dbPointer, createUserQuery, nil, nil, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
             print("用户账户表创建失败: \(errmsg)")
+        }else{
+            print("用户账户表建表成功")
         }
         if sqlite3_exec(dbPointer, createUserInfoQuery, nil, nil, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
             print("用户信息表创建失败: \(errmsg)")
+        }else{
+            print("用户信息表建表成功")
         }
         if sqlite3_exec(dbPointer, createSportDataQuery, nil, nil, nil) != SQLITE_OK {
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
             print("运动数据表创建失败: \(errmsg)")
+        }else{
+            print("运动数据表建表成功")
         }
     }
     //  析构
@@ -120,14 +125,14 @@ class SQLiteDatabase: ObservableObject {
         return id
     }
     //  查询账户密码
-    func getUser() -> String?{
+    func getUser(id: String) -> String?{
         let getUserQuery = "SELECT password FROM Users WHERE id = ?"
         var password : String!
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
         if sqlite3_prepare_v2(dbPointer, getUserQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
-            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             //  执行语句
             if sqlite3_step(statement) == SQLITE_ROW{
                 password = String(cString: sqlite3_column_text(statement, 0))
@@ -159,7 +164,7 @@ class SQLiteDatabase: ObservableObject {
     
     /*   用户信息   */
     //  查询用户信息
-    func getUserInfo() -> Info {
+    func getUserInfo(id: String) -> Info {
         let getUserInfoQuery = "SELECT * FROM UserInfo WHERE id=?"
         var userInfo = Info()
         var statement: OpaquePointer?
@@ -167,7 +172,7 @@ class SQLiteDatabase: ObservableObject {
         if sqlite3_prepare_v2(dbPointer, getUserInfoQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
             //  替代进去的字符串都换成nsstring.uft8string,源自参考大作业:“string直接插入会变成blob”
-            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             //  执行语句
             //  Q: step返回的是101,即执行完毕,但没有查询到结果; 破案:Navicat中手动添加数据无效,必须在swift中建表并插入数据
             if sqlite3_step(statement) == SQLITE_ROW{
@@ -187,8 +192,8 @@ class SQLiteDatabase: ObservableObject {
         return userInfo
     }
     //  更新用户信息
-    func updateUserInfo(username: String, phone: String, address: String, qq: String, logo: String){
-        let updateUserInfoQuery = (ExitOrNot(table: "UserInfo")) ?
+    func updateUserInfo(id: String,username: String, phone: String, address: String, qq: String, logo: String){
+        let updateUserInfoQuery = (ExitOrNot(table: "UserInfo",id: id)) ?
             "UPDATE UserInfo SET username=?, phone=?, address=?, qq=?, logo=? WHERE id=?;" :
             "INSERT INTO UserInfo(username, phone, address, qq, logo, id) VALUES(?, ?, ?, ?, ?, ?);"
         
@@ -201,7 +206,7 @@ class SQLiteDatabase: ObservableObject {
             sqlite3_bind_text(statement, 3, (address as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 4, (qq as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 5, (logo as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 6, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 6, (id as NSString).utf8String, -1, nil)
             //  执行语句
             if sqlite3_step(statement) != SQLITE_DONE{
                 let errmsg = String(cString: sqlite3_errmsg(dbPointer))
@@ -216,14 +221,14 @@ class SQLiteDatabase: ObservableObject {
     
     /*   运动数据   */
     //   查询运动数据 !!!!暂且
-    func getSportData() -> SportData{
+    func getSportData(id: String) -> SportData{
         let getSportDataQuery = "SELECT * FROM SportData WHERE id=?"
         var sportData = SportData()
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
         if sqlite3_prepare_v2(dbPointer, getSportDataQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
-            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             //  执行语句
             if sqlite3_step(statement) == SQLITE_ROW{
                 //  !!!!暂且
@@ -240,13 +245,13 @@ class SQLiteDatabase: ObservableObject {
         return sportData
     }
     //  保存运动数据 !!!! 暂且选择String数据类型
-    func saveSportData(dateTime: String, consumTime: String, checkImage: String){
+    func saveSportData(id: String,dateTime: String, consumTime: String, checkImage: String){
         let saveSportDataQuery = "INSERT INTO SportData(id, dataTime, consumTime, checkTime) VALUES(?, ?, ?, ?);"
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
         if sqlite3_prepare_v2(dbPointer, saveSportDataQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
-            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 2, (dateTime as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 3, (consumTime as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 4, (checkImage as NSString).utf8String, -1, nil)
@@ -263,11 +268,11 @@ class SQLiteDatabase: ObservableObject {
     }
     
     //  判断表项是否存在本用户数据
-    func ExitOrNot(table: String) -> Bool{
+    func ExitOrNot(table: String,id: String) -> Bool{
         let exitQuery = "SELECT * FROM \(table) WHERE id=?"    //  ⚠️SQL语言不能多空格!!!!
         var statement: OpaquePointer?
         if sqlite3_prepare_v2(dbPointer, exitQuery, -1, &statement, nil) == SQLITE_OK{
-            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             //  done:(bug) sqlite3_step执行返回报错SQLITE_MISUSE; 推测是因为数据库连接有问题
             if  sqlite3_step(statement) == SQLITE_ROW{
                 //  todo 此处对返回的处理有误

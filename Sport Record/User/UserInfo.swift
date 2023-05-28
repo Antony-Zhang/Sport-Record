@@ -12,11 +12,6 @@ struct UserInfo: View {
     @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
     
     @State var isEditMode = false;  // 修改状态
-//    @State var logo = "logo"
-//    @State var name = "无"
-//    @State var phone = "无"
-//    @State var qq = "无"
-//    @State var address = "无"
     @State var userInfo = Info()
     
     @State var nameReg = "无"
@@ -92,7 +87,7 @@ struct UserInfo: View {
                             userInfo.qq = qqReg;
                             userInfo.address = addressReg;
                             //  更新数据库
-                            dataBase.updateUserInfo(username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo)
+                            dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo)
                             isEditMode = false;
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
@@ -101,11 +96,7 @@ struct UserInfo: View {
             }
         }.navigationTitle("个人信息")
             .onAppear{
-                userInfo = Info(id: dataBase.getUserInfo().id,
-                                username: dataBase.getUserInfo().username,
-                                phone: dataBase.getUserInfo().phone,
-                                address: dataBase.getUserInfo().address,
-                                qq: dataBase.getUserInfo().qq)
+                userInfo = dataBase.getUserInfo(id: userSettings.id)
             }
         
 //        }

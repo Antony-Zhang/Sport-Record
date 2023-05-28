@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountSettings: View {
     @EnvironmentObject var dataBase :SQLiteDatabase
+    @EnvironmentObject var userSettings :UserSettings
     
     @State var isEditMode = true
     @State var n = ""
@@ -30,11 +31,13 @@ struct AccountSettings: View {
                     }
                 }.padding()
                 Section{
-                    Button("修改密码") {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                    }.font(.title).foregroundColor(.black).padding()
+                    //  todo 功能迭代
+//                    Button("修改密码") {
+//                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+//                    }.font(.title).foregroundColor(.black).padding()
                     Button("退出账号") {
-                        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                        userSettings.id = ""
+                        userSettings.notLogin.toggle()
                     }.font(.title).foregroundColor(.red).padding()
                 }
             }.navigationTitle("账号设置")  //  使用navigationTitle而不是Text来设置标题

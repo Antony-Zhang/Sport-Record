@@ -65,11 +65,12 @@ struct UserLogin: View {
         if(password.count < 6){
             msg = "密码长度小于6"
             return false
-        }else if (dataBase.getUser() == nil) {
+        }else if (dataBase.getUser(id: id) == nil) {
             //  核查用户账户
             msg = "用户不存在"
             return false
         }else{
+            userSettings.id = id
             return true
         }
     }
