@@ -25,8 +25,8 @@ struct AccountSettings: View {
                         .clipShape(Circle())    // 裁剪图像边框形状
                     
                     VStack(alignment: .leading){
-                        Text("Fishead_East").font(.title)
-                        Text("ID:  "+"ytzd2696").font(.title2)
+                        Text(dataBase.getUserInfo(id: userSettings.id).username).font(.title)
+                        Text("ID:  "+userSettings.id).font(.title2)
                             .foregroundColor(.gray)
                     }
                 }.padding()
@@ -47,5 +47,6 @@ struct AccountSettings: View {
     struct AccountSettings_Previews: PreviewProvider {
         static var previews: some View {
             AccountSettings().environmentObject(SQLiteDatabase.shared)
+                .environmentObject(UserSettings.shared)
         }
     }

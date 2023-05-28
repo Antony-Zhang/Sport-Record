@@ -10,11 +10,11 @@ import SQLite3
 
 // 用户信息结构体 !!! 暂且
 struct Info {
-    var id: String! = "无"
-    var username: String! = "无"
-    var phone: String! = "无"
-    var address: String! = "无"
-    var qq: String! = "无"
+    var id: String! = "id"
+    var username: String! = "昵称"
+    var phone: String! = "电话"
+    var address: String! = "地址"
+    var qq: String! = "扣扣"
     var logo: String! = "logo"
 }
 //  运动数据结构体 !!!! 暂且使用String
@@ -46,7 +46,7 @@ class SQLiteDatabase: ObservableObject {
             phone TEXT,
             address TEXT,
             qq TEXT,
-            logo BLOB,
+            logo TEXT,
             FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE
         );
     """
@@ -67,7 +67,7 @@ class SQLiteDatabase: ObservableObject {
         // 打开数据库,文件为“MovieRecord.db”
         let fileURL = try! FileManager.default
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("MovieRecord.db")
+            .appendingPathComponent("SportRecord.db")
         if sqlite3_open(fileURL.path, &dbPointer) == SQLITE_OK {
             print("数据库打开成功!")
         }else{
@@ -199,7 +199,10 @@ class SQLiteDatabase: ObservableObject {
         
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
-        if sqlite3_prepare_v2(dbPointer, updateUserInfoQuery, -1, &statement, nil) == SQLITE_OK{
+        //  todo Insert下prepare报错“table UserInfo has no column named logo”; 但是重启电脑直接运行竟然成功了!!
+        let reg = sqlite3_prepare_v2(dbPointer, updateUserInfoQuery, -1, &statement, nil)
+        print(reg)
+        if reg == SQLITE_OK{
             //  填充SQLite语句中的参数
             sqlite3_bind_text(statement, 1, (username as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 2, (phone as NSString).utf8String, -1, nil)
@@ -285,7 +288,7 @@ class SQLiteDatabase: ObservableObject {
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
             print("表项判断语句组织失败: \(errmsg)")
         }
-        print("表项\(table)不存在")
+        print("用户\(id)在表项\(table)中无数据")
         sqlite3_finalize(statement)
         return false
     }

@@ -78,15 +78,13 @@ struct UserRegister: View {
             msg = "密码两次输入不一致"
             return false
         }else{
-            let newid = dataBase.addUser(id: id, password: password)
-            //  添加用户
-//            print(newid)
-            if((newid?.isEmpty) != nil){
+            if let newid = dataBase.addUser(id: id, password: password){
+                //  添加用户
+                print("新用户id:\(newid)")
+                return true
+            }else{
                 msg = "账户已存在"
                 return false
-            }else{
-                
-                return true
             }
         }
     }

@@ -14,10 +14,10 @@ struct UserInfo: View {
     @State var isEditMode = false;  // 修改状态
     @State var userInfo = Info()
     
-    @State var nameReg = "无"
-    @State var phoneReg = "无"
-    @State var qqReg = "无"
-    @State var addressReg = "无"
+//    @State var nameReg = "无"
+//    @State var phoneReg = "无"
+//    @State var qqReg = "无"
+//    @State var addressReg = "无"
     
     
     var body: some View {
@@ -36,7 +36,7 @@ struct UserInfo: View {
             HStack{
                 Text("👤昵称:").font(.title2)
                 if(isEditMode){
-                    TextField("输入", text: $nameReg) // text是用来存输入字符的变量的引用
+                    TextField("输入", text: $userInfo.username) // text是用来存输入字符的变量的引用
                         .textFieldStyle(DefualtTextFeild())
                 }else{
                     Text(userInfo.username).font(.title2).frame(width: 200)
@@ -45,7 +45,7 @@ struct UserInfo: View {
             HStack{
                 Text("☎️手机:").font(.title2)
                 if(isEditMode){
-                    TextField("输入", text: $phoneReg) // text是用来存输入字符的变量
+                    TextField("输入", text: $userInfo.phone) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
                     Text(userInfo.phone).font(.title2).frame(width: 200)
@@ -54,7 +54,7 @@ struct UserInfo: View {
             HStack{
                 Text("🐧扣扣:").font(.title2)
                 if(isEditMode){
-                    TextField("输入", text: $qqReg) // text是用来存输入字符的变量
+                    TextField("输入", text: $userInfo.qq) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
                     Text(userInfo.qq).font(.title2).frame(width: 200)
@@ -63,7 +63,7 @@ struct UserInfo: View {
             HStack{
                 Text("🏠地址:").font(.title2)
                 if(isEditMode){
-                    TextField("输入", text: $addressReg) // text是用来存输入字符的变量
+                    TextField("输入", text: $userInfo.address) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
                     Text(userInfo.address).font(.title2).frame(width: 200)
@@ -82,10 +82,6 @@ struct UserInfo: View {
                             isEditMode = false ;
                         }.padding(.trailing).buttonStyle(RedRoundedButton())
                         Button("确定") {
-                            userInfo.username = nameReg;
-                            userInfo.phone = phoneReg;
-                            userInfo.qq = qqReg;
-                            userInfo.address = addressReg;
                             //  更新数据库
                             dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo)
                             isEditMode = false;
