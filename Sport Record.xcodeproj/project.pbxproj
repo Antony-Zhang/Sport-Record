@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011A0BFF2A22EEB6001CB4F4 /* testcontent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */; };
+		011A0C012A22F8A4001CB4F4 /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */; };
+		011A0C032A22F90F001CB4F4 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C022A22F90F001CB4F4 /* UserSettings.swift */; };
+		011A0C062A22FA8C001CB4F4 /* test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C052A22FA8C001CB4F4 /* test2.swift */; };
 		013356602A1A3672005A59F2 /* MovieRecord.db in Resources */ = {isa = PBXBuildFile; fileRef = 0133565F2A1A3672005A59F2 /* MovieRecord.db */; };
+		0153966C2A221BD8002125D1 /* Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153966B2A221BD8002125D1 /* Success.swift */; };
 		0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC42A0BB4A40071DCF1 /* Style.swift */; };
 		0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */; };
 		018CCB212A03BFE90007770B /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB202A03BFE90007770B /* UserRegister.swift */; };
@@ -48,7 +53,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testcontent.swift; sourceTree = "<group>"; };
+		011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
+		011A0C022A22F90F001CB4F4 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		011A0C052A22FA8C001CB4F4 /* test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test2.swift; sourceTree = "<group>"; };
 		0133565F2A1A3672005A59F2 /* MovieRecord.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = MovieRecord.db; path = "Sport Record/MovieRecord.db"; sourceTree = "<group>"; };
+		0153966B2A221BD8002125D1 /* Success.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Success.swift; sourceTree = "<group>"; };
 		0154CAC42A0BB4A40071DCF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettings.swift; sourceTree = "<group>"; };
 		018CCB202A03BFE90007770B /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
@@ -99,6 +109,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011A0C042A22F934001CB4F4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				018EF3B129FA48DE002CC0E1 /* MyApp.swift */,
+				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
+				011A0C022A22F90F001CB4F4 /* UserSettings.swift */,
+				011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */,
+				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		018CCB252A03C1C30007770B /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,10 +171,10 @@
 				018E73022A07E72000D5017A /* Record */,
 				018CCB252A03C1C30007770B /* User */,
 				01CDB64D2A0A4D1C0024E615 /* Login */,
-				0197F9522A08D9B7006AB7BD /* EntrancePage.swift */,
-				018EF3B129FA48DE002CC0E1 /* MyApp.swift */,
-				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
+				011A0C042A22F934001CB4F4 /* Main */,
 				01CDB64B2A0A49BD0024E615 /* Test.swift */,
+				011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */,
+				011A0C052A22FA8C001CB4F4 /* test2.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
 				018EF3B729FA48DF002CC0E1 /* Preview Content */,
 			);
@@ -189,6 +211,7 @@
 			children = (
 				018CCB202A03BFE90007770B /* UserRegister.swift */,
 				018CCB222A03C0420007770B /* UserLogin.swift */,
+				0153966B2A221BD8002125D1 /* Success.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -325,11 +348,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				018CCB292A03C2260007770B /* UserHomepage.swift in Sources */,
+				0153966C2A221BD8002125D1 /* Success.swift in Sources */,
+				011A0BFF2A22EEB6001CB4F4 /* testcontent.swift in Sources */,
 				0197F9532A08D9B7006AB7BD /* EntrancePage.swift in Sources */,
 				018CCB212A03BFE90007770B /* UserRegister.swift in Sources */,
 				018CCB232A03C0420007770B /* UserLogin.swift in Sources */,
 				018E73012A07E70A00D5017A /* SportRecording.swift in Sources */,
 				0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */,
+				011A0C062A22FA8C001CB4F4 /* test2.swift in Sources */,
+				011A0C012A22F8A4001CB4F4 /* SQLiteDatabase.swift in Sources */,
+				011A0C032A22F90F001CB4F4 /* UserSettings.swift in Sources */,
 				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
 				01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */,
 				0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */,

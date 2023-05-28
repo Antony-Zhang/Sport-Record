@@ -12,12 +12,13 @@ struct UserInfo: View {
     @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
     
     @State var isEditMode = false;  // 修改状态
-    @State var logo = "logo"
+//    @State var logo = "logo"
+//    @State var name = "无"
+//    @State var phone = "无"
+//    @State var qq = "无"
+//    @State var address = "无"
+    @State var userInfo = Info()
     
-    @State var name = "无"
-    @State var phone = "无"
-    @State var qq = "无"
-    @State var address = "无"
     @State var nameReg = "无"
     @State var phoneReg = "无"
     @State var qqReg = "无"
@@ -30,7 +31,7 @@ struct UserInfo: View {
             HStack{
                 Text("头像").font(.title2)
                 Spacer()
-                Image(logo).resizable()    // 修饰符,使Image对象大小可随意调整
+                Image(userInfo.logo).resizable()    // 修饰符,使Image对象大小可随意调整
                     .frame(width: 60,height: 60)
                 //   .scaledToFit()
                 //   .scaleEffect(0.25) //设置缩放比例
@@ -43,7 +44,7 @@ struct UserInfo: View {
                     TextField("输入", text: $nameReg) // text是用来存输入字符的变量的引用
                         .textFieldStyle(DefualtTextFeild())
                 }else{
-                    Text(name).font(.title2).frame(width: 200)
+                    Text(userInfo.username).font(.title2).frame(width: 200)
                 }
             }.frame(height: 40)
             HStack{
@@ -52,7 +53,7 @@ struct UserInfo: View {
                     TextField("输入", text: $phoneReg) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
-                    Text(phone).font(.title2).frame(width: 200)
+                    Text(userInfo.phone).font(.title2).frame(width: 200)
                 }
             }.frame(height: 40)
             HStack{
@@ -61,7 +62,7 @@ struct UserInfo: View {
                     TextField("输入", text: $qqReg) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
-                    Text(qq).font(.title2).frame(width: 200)
+                    Text(userInfo.qq).font(.title2).frame(width: 200)
                 }
             }.frame(height: 40)
             HStack{
@@ -70,7 +71,7 @@ struct UserInfo: View {
                     TextField("输入", text: $addressReg) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }else{
-                    Text(address).font(.title2).frame(width: 200)
+                    Text(userInfo.address).font(.title2).frame(width: 200)
                 }
             }.frame(height: 40)
             
@@ -86,18 +87,26 @@ struct UserInfo: View {
                             isEditMode = false ;
                         }.padding(.trailing).buttonStyle(RedRoundedButton())
                         Button("确定") {
-                            name = nameReg;
-                            phone = phoneReg;
-                            qq = qqReg;
-                            address = addressReg;
+                            userInfo.username = nameReg;
+                            userInfo.phone = phoneReg;
+                            userInfo.qq = qqReg;
+                            userInfo.address = addressReg;
+                            //  更新数据库
+                            dataBase.updateUserInfo(username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo)
                             isEditMode = false;
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
                 }
                 Spacer()
             }
-        }
-            .navigationTitle("个人信息")
+        }.navigationTitle("个人信息")
+            .onAppear{
+                userInfo = Info(id: dataBase.getUserInfo().id,
+                                username: dataBase.getUserInfo().username,
+                                phone: dataBase.getUserInfo().phone,
+                                address: dataBase.getUserInfo().address,
+                                qq: dataBase.getUserInfo().qq)
+            }
         
 //        }
     }
@@ -108,6 +117,7 @@ struct UserInfo: View {
 
 struct UserInfo_Previews: PreviewProvider {
     static var previews: some View {
-        UserInfo()
+        UserInfo().environmentObject(SQLiteDatabase.shared)
+            .environmentObject(UserSettings.shared)
     }
 }

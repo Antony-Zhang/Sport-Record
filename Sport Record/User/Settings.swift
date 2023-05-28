@@ -17,10 +17,6 @@ struct Settings : View{
     @EnvironmentObject var userSettings: UserSettings
     
     @State var isEditMode = true
-    // 选择选项的[索引]
-//    @State private var unitsSelect = 0
-//    @State private var ringSelect = ""
-//    @State private var planSelect = 0
     
     let UnitsOptions = Array(1...30)
     let RingOptions = ["Music1","Music2","Music3"]
@@ -53,8 +49,6 @@ struct Settings : View{
                 
             }//.position(x:200,y:220)
                 .navigationTitle("应用设置")
-                // 视图消失后保存设置
-                .onDisappear{userSettings.saveSettings()}
 //        }
     }
 }

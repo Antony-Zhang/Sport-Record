@@ -1,56 +1,12 @@
 //
-//  Sport_RecordApp.swift
+//  SQLiteDatabase.swift
 //  Sport Record
 //
-//  Created by EastOS on 2023/4/27.
+//  Created by EastOS on 2023/5/28.
 //
 
 import SwiftUI
 import SQLite3
-
-@main
-struct MyApp: App {
-    //  单例数据对象
-    @StateObject var userSettings = UserSettings.shared      //  设置信息
-    @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
-    
-    var body: some Scene {
-        WindowGroup {
-            //  根视图
-            EntrancePage().environmentObject(dataBase)  //  传入数据库对象
-                .environmentObject(userSettings)        //  传入设置对象
-        }
-    }
-}
-
-
-//  用户设置类 [单例模式]
-class UserSettings :ObservableObject{
-    static let shared = UserSettings()  //  唯一单例
-    
-    @Published var sportUnits: Int = 1  //  运动单位(min)
-    @Published var ring: String = "Music1"       //  响铃设置
-    @Published var plan: Int = 1       //  运动计划(天)
-    @Published var id: String   // 用户id
-    
-    let userDefaults = UserDefaults.standard
-    
-    //  读取设置
-    private init() {
-        sportUnits = Int(userDefaults.integer(forKey: "sportUnits"))
-        ring = userDefaults.string(forKey: "ring") ?? "Music1"
-        plan = Int(userDefaults.integer(forKey: "plan"))
-        id = userDefaults.string(forKey: "id") ?? ""
-    }
-    
-    //  保存设置
-    func saveSettings() {
-        userDefaults.set(sportUnits, forKey: "sportUnits")
-        userDefaults.set(ring, forKey: "ring")
-        userDefaults.set(plan, forKey: "plan")
-        userDefaults.set(id, forKey: id)
-    }
-}
 
 // 用户信息结构体 !!! 暂且
 struct Info {
@@ -68,6 +24,7 @@ struct SportData{
     var consumTIme: String!
     var checkImage: String!
 }
+
 
 // SQLite3数据库管理类 [单例模式]
 class SQLiteDatabase: ObservableObject {
@@ -139,8 +96,8 @@ class SQLiteDatabase: ObservableObject {
     }
     
     /*   账户信息   */
-    //  新建账户
-    func addUser(id: String, password: String){
+    //  新建账户,返回id
+    func addUser(id: String, password: String) -> String?{
         let insertUserQuery = "INSERT INTO Users (id, password) VALUES (?, ?);"
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
@@ -152,17 +109,20 @@ class SQLiteDatabase: ObservableObject {
             if sqlite3_step(statement) != SQLITE_DONE{
                 let errmsg = String(cString: sqlite3_errmsg(dbPointer))
                 print("账户插入失败: \(errmsg)")
+                return nil
             }
         }else{
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
             print("账户插入语句组织失败: \(errmsg)")
+            return nil
         }
         sqlite3_finalize(statement)
+        return id
     }
     //  查询账户密码
-    func getUser() -> String{
-        let getUserQuery = "SELECT password FROM Users WHERE id=?"
-        var password = ""
+    func getUser() -> String?{
+        let getUserQuery = "SELECT password FROM Users WHERE id = ?"
+        var password : String!
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
         if sqlite3_prepare_v2(dbPointer, getUserQuery, -1, &statement, nil) == SQLITE_OK{
@@ -207,7 +167,7 @@ class SQLiteDatabase: ObservableObject {
         if sqlite3_prepare_v2(dbPointer, getUserInfoQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
             //  替代进去的字符串都换成nsstring.uft8string,源自参考大作业:“string直接插入会变成blob”
-            print(sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil))
+            sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
             //  执行语句
             //  Q: step返回的是101,即执行完毕,但没有查询到结果; 破案:Navicat中手动添加数据无效,必须在swift中建表并插入数据
             if sqlite3_step(statement) == SQLITE_ROW{
@@ -309,15 +269,12 @@ class SQLiteDatabase: ObservableObject {
         if sqlite3_prepare_v2(dbPointer, exitQuery, -1, &statement, nil) == SQLITE_OK{
             sqlite3_bind_text(statement, 1, (SQLiteDatabase.id as NSString).utf8String, -1, nil)
             //  done:(bug) sqlite3_step执行返回报错SQLITE_MISUSE; 推测是因为数据库连接有问题
-            let s1 = sqlite3_step(statement)
-            if  s1 == SQLITE_ROW{
+            if  sqlite3_step(statement) == SQLITE_ROW{
                 //  todo 此处对返回的处理有误
                 if (String(cString: sqlite3_column_text(statement, 0)) != ""){
                     print("表项\(table)存在")
                     return true
                 }
-            }else{
-                print(s1)
             }
         }else{
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))

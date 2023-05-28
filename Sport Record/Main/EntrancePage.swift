@@ -26,6 +26,16 @@ struct EntrancePage: View {
                 Image(systemName: "person.circle")
                 Text("用户")
             }
+        }.fullScreenCover(isPresented: $userSettings.notLogin){
+            if(userSettings.signIn){
+                UserRegister()
+                    .environmentObject(dataBase)
+                    .environmentObject(userSettings)
+            }else{
+                UserLogin()
+                    .environmentObject(dataBase)
+                    .environmentObject(userSettings)
+            }
         }
     }
 }
