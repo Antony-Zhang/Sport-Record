@@ -18,7 +18,7 @@ struct AccountSettings: View {
 //        NavigationView {
             Form() {
                 HStack(alignment: .center){
-                    Image("logo").resizable()    // 修饰符,使Image对象大小可随意调整
+                    Image(uiImage: dataBase.getUserInfo(id: userSettings.id).logo).resizable()    // 修饰符,使Image对象大小可随意调整
                         .frame(width: 100,height: 100)
                         //   .scaledToFit()
                         //   .scaleEffect(0.25) //设置缩放比例

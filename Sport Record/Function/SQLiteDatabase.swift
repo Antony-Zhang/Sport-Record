@@ -15,14 +15,15 @@ struct Info {
     var phone: String! = "电话"
     var address: String! = "地址"
     var qq: String! = "扣扣"
-    var logo: String! = "logo"
+    var logo: UIImage! = UIImage(named: "logo") //  默认为内嵌的图像
+//    var logo: String! = "logo"
 }
-//  运动数据结构体 !!!! 暂且使用String
+//  运动数据结构体 !!!! 暂且使用String todo
 struct SportData{
     var id: String!
     var dateTime: String!
     var consumTIme: String!
-    var checkImage: String!
+    var checkImage: UIImage!
 }
 
 
@@ -46,7 +47,7 @@ class SQLiteDatabase: ObservableObject {
             phone TEXT,
             address TEXT,
             qq TEXT,
-            logo TEXT,
+            logo BLOB,
             FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE
         );
     """
@@ -176,13 +177,13 @@ class SQLiteDatabase: ObservableObject {
             //  执行语句
             //  Q: step返回的是101,即执行完毕,但没有查询到结果; 破案:Navicat中手动添加数据无效,必须在swift中建表并插入数据
             if sqlite3_step(statement) == SQLITE_ROW{
-                //  todo !!!!暂且
                 userInfo.id = String(cString: sqlite3_column_text(statement, 0))
                 userInfo.username = String(cString: sqlite3_column_text(statement, 1))
                 userInfo.phone = String(cString: sqlite3_column_text(statement, 2))
                 userInfo.address = String(cString: sqlite3_column_text(statement, 3))
                 userInfo.qq = String(cString: sqlite3_column_text(statement, 4))
-                userInfo.logo = String(cString: sqlite3_column_text(statement, 5))
+                //  todo 数据库取图片
+//                userInfo.logo = String(cString: sqlite3_column_text(statement, 5))
             }
         }else{
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
@@ -192,11 +193,11 @@ class SQLiteDatabase: ObservableObject {
         return userInfo
     }
     //  更新用户信息
-    func updateUserInfo(id: String,username: String, phone: String, address: String, qq: String, logo: String){
+    func updateUserInfo(id: String,username: String, phone: String, address: String, qq: String, logo: UIImage){
         let updateUserInfoQuery = (ExitOrNot(table: "UserInfo",id: id)) ?
             "UPDATE UserInfo SET username=?, phone=?, address=?, qq=?, logo=? WHERE id=?;" :
             "INSERT INTO UserInfo(username, phone, address, qq, logo, id) VALUES(?, ?, ?, ?, ?, ?);"
-        
+        //  todo sql语句如何写?
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
         //  todo Insert下prepare报错“table UserInfo has no column named logo”; 但是重启电脑直接运行竟然成功了!!
@@ -208,7 +209,8 @@ class SQLiteDatabase: ObservableObject {
             sqlite3_bind_text(statement, 2, (phone as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 3, (address as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 4, (qq as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 5, (logo as NSString).utf8String, -1, nil)
+            //  todo 图片类型的logo如何更新?
+//            sqlite3_bind_text(statement, 5, (logo as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 6, (id as NSString).utf8String, -1, nil)
             //  执行语句
             if sqlite3_step(statement) != SQLITE_DONE{
@@ -238,7 +240,8 @@ class SQLiteDatabase: ObservableObject {
                 sportData.id = String(cString: sqlite3_column_text(statement, 0))
                 sportData.dateTime = String(cString: sqlite3_column_text(statement, 1))
                 sportData.consumTIme = String(cString: sqlite3_column_text(statement, 2))
-                sportData.checkImage = String(cString: sqlite3_column_text(statement, 3))
+                //  todo 数据库取图片
+//                sportData.checkImage = String(cString: sqlite3_column_text(statement, 3))
             }
         }else{
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
@@ -248,16 +251,18 @@ class SQLiteDatabase: ObservableObject {
         return sportData
     }
     //  保存运动数据 !!!! 暂且选择String数据类型
-    func saveSportData(id: String,dateTime: String, consumTime: String, checkImage: String){
-        let saveSportDataQuery = "INSERT INTO SportData(id, dataTime, consumTime, checkTime) VALUES(?, ?, ?, ?);"
+    func saveSportData(id: String,dateTime: String, consumTime: String, checkImage: UIImage){
+        let saveSportDataQuery = "INSERT INTO SportData(id, dataTime, consumTime, checkImage) VALUES(?, ?, ?, ?);"
         var statement: OpaquePointer?
+        //  todo sql语句如何写
         //  将String转化为SQLite语句对象并编译
         if sqlite3_prepare_v2(dbPointer, saveSportDataQuery, -1, &statement, nil) == SQLITE_OK{
             //  填充SQLite语句中的参数
             sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 2, (dateTime as NSString).utf8String, -1, nil)
             sqlite3_bind_text(statement, 3, (consumTime as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 4, (checkImage as NSString).utf8String, -1, nil)
+            //  todo 图片如何更新
+//            sqlite3_bind_text(statement, 4, (checkImage as NSString).utf8String, -1, nil)
             //  执行语句
             if sqlite3_step(statement) != SQLITE_DONE{
                 let errmsg = String(cString: sqlite3_errmsg(dbPointer))

@@ -14,25 +14,49 @@ struct UserInfo: View {
     @State var isEditMode = false;  // 修改状态
     @State var userInfo = Info()
     
-//    @State var nameReg = "无"
-//    @State var phoneReg = "无"
-//    @State var qqReg = "无"
-//    @State var addressReg = "无"
+    @State private var showImagePicker = false  //  进行图片选择(相册or拍照)
+    @State private var showActionSheet = false  //  进行图片来源选择
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary   //  来源类型(默认相册)
     
     
     var body: some View {
 //        NavigationView(){     //  会使页面切换时下偏,但从主页面开始调试时、标题会出现
         Form(){
-            HStack{
-                Text("头像").font(.title2)
-                Spacer()
-                Image(userInfo.logo).resizable()    // 修饰符,使Image对象大小可随意调整
-                    .frame(width: 60,height: 60)
-                //   .scaledToFit()
-                //   .scaleEffect(0.25) //设置缩放比例
-                    .clipShape(Circle())    // 裁剪图像边框形状
+            Section{
+                HStack{
+                    Text("头像").font(.title2)
+                    Spacer()
+                    Image(uiImage: userInfo.logo).resizable()    // 修饰符,使Image对象大小可随意调整
+                        .frame(width: 60,height: 60)
+                    //   .scaledToFit()
+                    //   .scaleEffect(0.25) //设置缩放比例
+                        .clipShape(Circle())    // 裁剪图像边框形状
+                        .onTapGesture {
+                            showActionSheet = true
+                        }
                     
+                }
             }
+            .actionSheet(isPresented: $showActionSheet){
+                ActionSheet(title: Text("选择图片"),message: nil,buttons: [
+                    .default(Text("相册")){
+                        sourceType = .photoLibrary
+                        showImagePicker = true
+                    },
+                    .default(Text("拍照")){
+                        sourceType = .camera
+                        showImagePicker = true
+                    },
+                    .cancel()
+                ])
+            }
+            .sheet(isPresented: $showImagePicker,
+                   content: {
+                ImagePicker(sourceType: sourceType) { image in
+                    userInfo.logo = image
+                }
+            })
+            
             HStack{
                 Text("👤昵称:").font(.title2)
                 if(isEditMode){
@@ -83,7 +107,7 @@ struct UserInfo: View {
                         }.padding(.trailing).buttonStyle(RedRoundedButton())
                         Button("确定") {
                             //  更新数据库
-                            dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo)
+                            dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo!)
                             isEditMode = false;
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
@@ -94,7 +118,6 @@ struct UserInfo: View {
             .onAppear{
                 userInfo = dataBase.getUserInfo(id: userSettings.id)
             }
-        
 //        }
     }
 }
