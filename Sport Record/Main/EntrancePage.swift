@@ -15,7 +15,10 @@ struct EntrancePage: View {
     
     var body: some View {
         TabView {   // 底部导航栏
-            Sport().tabItem {
+            Sport()
+                .environmentObject(dataBase)
+                .environmentObject(userSettings)
+                .tabItem {
                 Image(systemName: "figure.jumprope")
                 Text("运动")
             }

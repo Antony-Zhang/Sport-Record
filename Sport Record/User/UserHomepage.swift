@@ -11,8 +11,6 @@ struct UserHomepage : View{
     @EnvironmentObject var dataBase :SQLiteDatabase
     @EnvironmentObject var userSettings: UserSettings
     @State var userInfo: Info = Info()
-//    @State var logo: UIImage = UIImage()
-//    @State var username: String = "昵称"
     
     var body: some View{
         NavigationView {
@@ -49,8 +47,6 @@ struct UserHomepage : View{
             }//.position(x:200,y:220)
             .navigationTitle("个人")  //  使用navigationTitle而不是Text来设置标题
         }.onAppear{
-//            logo = dataBase.getUserInfo(id: userSettings.id).logo
-//            username = dataBase.getUserInfo(id: userSettings.id).username
             userInfo = dataBase.getUserInfo(id: userSettings.id)
         }
     }
