@@ -12,7 +12,6 @@ struct AccountSettings: View {
     @EnvironmentObject var userSettings :UserSettings
     
     @State var isEditMode = true
-    @State var n = ""
     
     var body: some View {
 //        NavigationView {

@@ -10,14 +10,16 @@ import SwiftUI
 struct UserInfo: View {
     @StateObject var userSettings = UserSettings.shared      //  设置信息
     @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
+    //  从母视图UserHomepage传来的绑定值,保证本视图修改后母视图信息的同步更新
+//    @Binding var logo: UIImage
+//    @Binding var username: String
+    @Binding var userInfo: Info
     
     @State var isEditMode = false;  // 修改状态
-    @State var userInfo = Info()
     
     @State private var showImagePicker = false  //  进行图片选择(相册or拍照)
     @State private var showActionSheet = false  //  进行图片来源选择
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary   //  来源类型(默认相册)
-    
     
     var body: some View {
 //        NavigationView(){     //  会使页面切换时下偏,但从主页面开始调试时、标题会出现
@@ -26,14 +28,15 @@ struct UserInfo: View {
                 HStack{
                     Text("头像").font(.title2)
                     Spacer()
+                    Text("点击更换").foregroundColor(.gray)
+                        .onTapGesture {
+                            showActionSheet = true
+                        }
                     Image(uiImage: userInfo.logo).resizable()    // 修饰符,使Image对象大小可随意调整
                         .frame(width: 60,height: 60)
                     //   .scaledToFit()
                     //   .scaleEffect(0.25) //设置缩放比例
                         .clipShape(Circle())    // 裁剪图像边框形状
-                        .onTapGesture {
-                            showActionSheet = true
-                        }
                     
                 }
             }
@@ -106,8 +109,8 @@ struct UserInfo: View {
                             isEditMode = false ;
                         }.padding(.trailing).buttonStyle(RedRoundedButton())
                         Button("确定") {
-                            //  更新数据库
-                            dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq, logo: userInfo.logo!)
+                            //  更新数据库,注意username是绑定值
+                            dataBase.updateUserInfo(id: userSettings.id, username: userInfo.username, phone: userInfo.phone, address: userInfo.address, qq: userInfo.qq)
                             isEditMode = false;
                         }.padding(.leading).buttonStyle(BlueRoundedButton())
                     }
@@ -115,19 +118,18 @@ struct UserInfo: View {
                 Spacer()
             }
         }.navigationTitle("个人信息")
-            .onAppear{
-                userInfo = dataBase.getUserInfo(id: userSettings.id)
+            .onDisappear{
+                dataBase.updateLogo(id: userSettings.id, logo: userInfo.logo)
             }
-//        }
     }
 }
 
 
 
 
-struct UserInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        UserInfo().environmentObject(SQLiteDatabase.shared)
-            .environmentObject(UserSettings.shared)
-    }
-}
+//struct UserInfo_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserInfo(userInfo: $userInfo).environmentObject(SQLiteDatabase.shared)
+//            .environmentObject(UserSettings.shared)
+//    }
+//}
