@@ -33,7 +33,7 @@ struct UserLogin: View {
                 
                 HStack {
                     Text("密    码:").font(.system(size:25))
-                    TextField("输入密码", text: $password) // text是用来存输入字符的变量
+                    SecureField("输入密码", text: $password) // text是用来存输入字符的变量
                         .textFieldStyle(DefualtTextFeild())
                 }.padding(10)
                 

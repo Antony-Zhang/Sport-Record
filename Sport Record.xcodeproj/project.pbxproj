@@ -115,9 +115,9 @@
 		015D87CB2A234B5E0088377A /* Function */ = {
 			isa = PBXGroup;
 			children = (
+				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
 				01DD56322A2617D00014388B /* TimeManager.swift */,
 				015D87CC2A234C7B0088377A /* ImagePicker.swift */,
-				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
 				011A0C022A22F90F001CB4F4 /* UserSettings.swift */,
 				011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */,
 			);
