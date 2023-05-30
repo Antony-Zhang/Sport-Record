@@ -26,9 +26,10 @@ struct SportRecording: View {
     let hours = Array(0...23)
     let minutesAndSeconds = Array(0...59)
     
-    @State private var isTiming = false   //  计时状态
-    @State private var isStarted = false  //  运动状态
-    @State private var showAlert = false    // 退出的确认弹窗
+    @State private var isTiming = false     //  计时状态
+    @State private var isStarted = false    //  运动状态
+    @State private var isOver = false       //  计时结束
+    @State private var showExit = false    //  中途退出
     
     var body: some View {
         Form{
@@ -74,6 +75,8 @@ struct SportRecording: View {
                             guard isTiming else{ return }
                             if timeRemaining > 0 {
                                 timeRemaining -= 1
+                            }else{
+                                isOver = true
                             }
                         }
                 }
@@ -107,6 +110,19 @@ struct SportRecording: View {
                     .frame(width: 90,height: 100)
                 }.pickerStyle(.wheel)
             }
+            //  中途退出
+            .actionSheet(isPresented: $showExit){
+                ActionSheet(title: Text("结束运动"),
+                            message: Text("运动记录将直接保存\n统计数据可能不准确"),
+                            buttons: [
+                                .default(Text("确认")){
+                                isTiming = false
+                                isStarted = false
+                                presentationMode.wrappedValue.dismiss()
+                                },
+                                .cancel(Text("取消"))
+                            ])
+            }
             //  开关部分
             Section{
                 if(!isStarted){         //  未开始运动
@@ -132,7 +148,7 @@ struct SportRecording: View {
                             .foregroundColor(.red)
                             .onTapGesture {
                                 //  退出界面
-                                showAlert.toggle()
+                                showExit.toggle()
                             }
                     }
                 }else{                  //  正在计时
@@ -149,26 +165,24 @@ struct SportRecording: View {
                             .foregroundColor(.red)
                             .onTapGesture {
                                 //  退出界面
-                                showAlert.toggle()
+                                showExit.toggle()
                             }
                     }
-                    
                 }
-            }.navigationBarBackButtonHidden(true)
-                .alert(isPresented: $showAlert){
+            }.alert(isPresented: $isOver){
+                    //  计时结束弹窗
                     Alert(
-                        title: Text("结束运动"),
-                        message: Text("运动记录将直接保存\n统计数据可能不准确"),
-                        primaryButton: .default(Text("确认"),action:{
+                        title: Text("计时结束"),
+                        message: Text("🎉\n恭喜你!完成运动!\n详细记录可见于\n“个人信息->个人数据”"),
+                        primaryButton: .default(Text("确认"), action: {
                             isTiming = false
                             isStarted = false
                             presentationMode.wrappedValue.dismiss()
-                            
                         }),
-                        secondaryButton: .cancel(Text("取消"))
+                        secondaryButton: .cancel(Text("别点我"))
                     )
                 }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     
     //  根据选择的时间计算总秒数,并初始化剩余时间
