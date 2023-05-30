@@ -36,7 +36,7 @@ struct UserHomepage : View{
                     Text("个人信息").font(.title).padding()
                 }
                 NavigationLink(destination: RecordCharts().environmentObject(dataBase)){
-                    Text("个人数据").font(.title).padding()
+                    Text("运动数据").font(.title).padding()
                 }
                 NavigationLink(destination: Settings().environmentObject(userSettings)) {
                     Text("运动设置").font(.title).padding()

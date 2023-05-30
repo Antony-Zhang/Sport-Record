@@ -7,16 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011A0BFF2A22EEB6001CB4F4 /* testcontent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */; };
 		011A0C012A22F8A4001CB4F4 /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */; };
 		011A0C032A22F90F001CB4F4 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C022A22F90F001CB4F4 /* UserSettings.swift */; };
-		011A0C062A22FA8C001CB4F4 /* test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A0C052A22FA8C001CB4F4 /* test2.swift */; };
 		0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC42A0BB4A40071DCF1 /* Style.swift */; };
 		0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */; };
-		015B9E2D2A259AB90059455C /* testTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015B9E2C2A259AB90059455C /* testTime.swift */; };
-		015B9E2F2A25A7F40059455C /* testTime2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015B9E2E2A25A7F40059455C /* testTime2.swift */; };
-		015D87C82A2349530088377A /* testPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D87C72A2349530088377A /* testPicture.swift */; };
-		015D87CA2A234A600088377A /* testPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D87C92A234A600088377A /* testPhoto.swift */; };
 		015D87CD2A234C7B0088377A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D87CC2A234C7B0088377A /* ImagePicker.swift */; };
 		018CCB212A03BFE90007770B /* UserRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB202A03BFE90007770B /* UserRegister.swift */; };
 		018CCB232A03C0420007770B /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CCB222A03C0420007770B /* UserLogin.swift */; };
@@ -35,8 +29,7 @@
 		018EF3CF29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */; };
 		0197F9532A08D9B7006AB7BD /* EntrancePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197F9522A08D9B7006AB7BD /* EntrancePage.swift */; };
 		01CDB64A2A0A48E70024E615 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CDB6492A0A48E70024E615 /* Sport.swift */; };
-		01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CDB64B2A0A49BD0024E615 /* Test.swift */; };
-		01ED97FB2A231D60005FD185 /* SportRecord.db in Resources */ = {isa = PBXBuildFile; fileRef = 01ED97FA2A231D60005FD185 /* SportRecord.db */; };
+		01DD56332A2617D00014388B /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD56322A2617D00014388B /* TimeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,16 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testcontent.swift; sourceTree = "<group>"; };
 		011A0C002A22F8A4001CB4F4 /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
 		011A0C022A22F90F001CB4F4 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		011A0C052A22FA8C001CB4F4 /* test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test2.swift; sourceTree = "<group>"; };
 		0154CAC42A0BB4A40071DCF1 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		0154CAC82A0BC4460071DCF1 /* AccountSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettings.swift; sourceTree = "<group>"; };
-		015B9E2C2A259AB90059455C /* testTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testTime.swift; sourceTree = "<group>"; };
-		015B9E2E2A25A7F40059455C /* testTime2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testTime2.swift; sourceTree = "<group>"; };
-		015D87C72A2349530088377A /* testPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPicture.swift; sourceTree = "<group>"; };
-		015D87C92A234A600088377A /* testPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPhoto.swift; sourceTree = "<group>"; };
 		015D87CC2A234C7B0088377A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		018CCB202A03BFE90007770B /* UserRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegister.swift; sourceTree = "<group>"; };
 		018CCB222A03C0420007770B /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
@@ -88,8 +75,7 @@
 		018EF3CE29FA48DF002CC0E1 /* Sport_RecordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport_RecordUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0197F9522A08D9B7006AB7BD /* EntrancePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrancePage.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		01CDB6492A0A48E70024E615 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
-		01CDB64B2A0A49BD0024E615 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		01ED97FA2A231D60005FD185 /* SportRecord.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = SportRecord.db; path = "Sport Record/SportRecord.db"; sourceTree = "<group>"; };
+		01DD56322A2617D00014388B /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +115,7 @@
 		015D87CB2A234B5E0088377A /* Function */ = {
 			isa = PBXGroup;
 			children = (
+				01DD56322A2617D00014388B /* TimeManager.swift */,
 				015D87CC2A234C7B0088377A /* ImagePicker.swift */,
 				0154CAC42A0BB4A40071DCF1 /* Style.swift */,
 				011A0C022A22F90F001CB4F4 /* UserSettings.swift */,
@@ -163,7 +150,6 @@
 		018EF3A529FA48DE002CC0E1 = {
 			isa = PBXGroup;
 			children = (
-				01ED97FA2A231D60005FD185 /* SportRecord.db */,
 				018EF3B029FA48DE002CC0E1 /* Sport Record */,
 				018EF3C129FA48DF002CC0E1 /* Sport RecordTests */,
 				018EF3CB29FA48DF002CC0E1 /* Sport RecordUITests */,
@@ -189,13 +175,6 @@
 				01CDB64D2A0A4D1C0024E615 /* Login */,
 				015D87CB2A234B5E0088377A /* Function */,
 				011A0C042A22F934001CB4F4 /* Main */,
-				01CDB64B2A0A49BD0024E615 /* Test.swift */,
-				011A0BFE2A22EEB6001CB4F4 /* testcontent.swift */,
-				011A0C052A22FA8C001CB4F4 /* test2.swift */,
-				015D87C72A2349530088377A /* testPicture.swift */,
-				015D87C92A234A600088377A /* testPhoto.swift */,
-				015B9E2C2A259AB90059455C /* testTime.swift */,
-				015B9E2E2A25A7F40059455C /* testTime2.swift */,
 				018EF3B529FA48DF002CC0E1 /* Assets.xcassets */,
 				018EF3B729FA48DF002CC0E1 /* Preview Content */,
 			);
@@ -341,7 +320,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				018EF3B929FA48DF002CC0E1 /* Preview Assets.xcassets in Resources */,
-				01ED97FB2A231D60005FD185 /* SportRecord.db in Resources */,
 				018EF3B629FA48DF002CC0E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,26 +346,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				018CCB292A03C2260007770B /* UserHomepage.swift in Sources */,
-				011A0BFF2A22EEB6001CB4F4 /* testcontent.swift in Sources */,
 				0197F9532A08D9B7006AB7BD /* EntrancePage.swift in Sources */,
-				015B9E2F2A25A7F40059455C /* testTime2.swift in Sources */,
 				018CCB212A03BFE90007770B /* UserRegister.swift in Sources */,
 				018CCB232A03C0420007770B /* UserLogin.swift in Sources */,
 				018E73012A07E70A00D5017A /* SportRecording.swift in Sources */,
 				0154CAC52A0BB4A40071DCF1 /* Style.swift in Sources */,
-				011A0C062A22FA8C001CB4F4 /* test2.swift in Sources */,
 				011A0C012A22F8A4001CB4F4 /* SQLiteDatabase.swift in Sources */,
 				011A0C032A22F90F001CB4F4 /* UserSettings.swift in Sources */,
 				018E73062A07E78D00D5017A /* RecordDetails.swift in Sources */,
-				01CDB64C2A0A49BD0024E615 /* Test.swift in Sources */,
+				01DD56332A2617D00014388B /* TimeManager.swift in Sources */,
 				015D87CD2A234C7B0088377A /* ImagePicker.swift in Sources */,
 				0154CAC92A0BC4460071DCF1 /* AccountSettings.swift in Sources */,
-				015D87C82A2349530088377A /* testPicture.swift in Sources */,
 				018EF3B229FA48DE002CC0E1 /* MyApp.swift in Sources */,
-				015B9E2D2A259AB90059455C /* testTime.swift in Sources */,
 				018E73042A07E76B00D5017A /* RecordCharts.swift in Sources */,
 				018E73082A07E7B200D5017A /* RecordAnalysis.swift in Sources */,
-				015D87CA2A234A600088377A /* testPhoto.swift in Sources */,
 				018E72FF2A07E4A500D5017A /* UserInfo.swift in Sources */,
 				01CDB64A2A0A48E70024E615 /* Sport.swift in Sources */,
 				018CCB272A03C1E90007770B /* Settings.swift in Sources */,

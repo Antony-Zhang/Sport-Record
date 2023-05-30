@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct SportRecording: View {
     @EnvironmentObject var dataBase :SQLiteDatabase
     @EnvironmentObject var userSettings: UserSettings
     @Environment(\.presentationMode) var presentationMode   // 用于退出返回
     
+    @State var sportData = SportData(id: UserSettings.shared.id)    //  初始化时,date便已经是当天日期
+    //  图片
     @State private var showImagePicker = false  //  进行图片选择(相册or拍照)
     @State private var showActionSheet = false  //  进行图片来源选择
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary   //  来源类型(默认相册)
-    @State var checkImage: UIImage = UIImage()
-    
+    //  定时
     @State private var selectedHours = 0
     @State private var selectedMinutes = 0
     @State private var selectedSeconds = 0
@@ -25,7 +27,7 @@ struct SportRecording: View {
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()    //  定时器,每秒更新一次
     let hours = Array(0...23)
     let minutesAndSeconds = Array(0...59)
-    
+    //  弹窗
     @State private var isTiming = false     //  计时状态
     @State private var isStarted = false    //  运动状态
     @State private var isOver = false       //  计时结束
@@ -33,10 +35,16 @@ struct SportRecording: View {
     
     var body: some View {
         Form{
-            //  照片部分
+            //  日期
+            HStack{
+                Spacer()
+                Text("\(TimeManager.dateString(date: (sportData.date)))").font(.title2).foregroundColor(.gray)
+                Spacer()
+            }
+            //  照片
             Section{
                 Text("运动记录照片").font(.title3)
-                Image(uiImage: checkImage)
+                Image(uiImage: sportData.checkImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
@@ -60,15 +68,15 @@ struct SportRecording: View {
             .sheet(isPresented: $showImagePicker,
                    content: {
                 ImagePicker(sourceType: sourceType) { image in
-                    checkImage = image
+                    sportData.checkImage = image
                 }
             })
-            //  剩余时间部分
+            //  剩余时间
             Section{
                 HStack{
                     Text("剩余时间").font(.title3)
                     Spacer()
-                    Text("\(timeString(time: timeRemaining))")  //  显示剩余时间
+                    Text("\(timeIntervalString(time: timeRemaining))")  //  显示剩余时间
                         .font(.largeTitle)
                         .onReceive(timer) { _ in    //  定时器更新时,更新剩余时间
                             //  首先判断计时状态
@@ -76,14 +84,11 @@ struct SportRecording: View {
                             if timeRemaining > 0 {
                                 timeRemaining -= 1
                             }else{
+                                sportData.consumTime = TimeManager.stringTime(timeString: timeIntervalString(time: totaltime - timeRemaining))
                                 isOver = true
                             }
                         }
                 }
-            }
-            //  定时部分
-            VStack{
-                Text("定时").font(.title3)
                 HStack{
                     //  小时选择器
                     Picker(selection: $selectedHours, label: Text("时")) {
@@ -116,24 +121,35 @@ struct SportRecording: View {
                             message: Text("运动记录将直接保存\n统计数据可能不准确"),
                             buttons: [
                                 .default(Text("确认")){
-                                isTiming = false
-                                isStarted = false
-                                presentationMode.wrappedValue.dismiss()
+                                    isTiming = false
+                                    isStarted = false
+                                    sportData.consumTime = TimeManager.stringTime(timeString: timeIntervalString(time: totaltime - timeRemaining))
+                                    presentationMode.wrappedValue.dismiss()
                                 },
                                 .cancel(Text("取消"))
                             ])
             }
-            //  开关部分
+            //  开关
             Section{
                 if(!isStarted){         //  未开始运动
-                    Label("开始", systemImage: "play.circle.fill")
-                        .font(.largeTitle)
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            startTimer()
-                            isStarted.toggle()
-                            isTiming.toggle()
-                        }
+                    HStack{
+                        Label("开始", systemImage: "play.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                startTimer()
+                                isStarted.toggle()
+                                isTiming.toggle()
+                            }
+                        Spacer()
+                        Label("退出", systemImage: "figure.walk.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(.red)
+                            .onTapGesture {
+                                //  退出界面
+                                showExit.toggle()
+                            }
+                    }
                 }else if(!isTiming){    //  暂停计时
                     HStack{
                         Label("继续", systemImage: "pause.circle.fill")
@@ -172,7 +188,7 @@ struct SportRecording: View {
             }.alert(isPresented: $isOver){
                     //  计时结束弹窗
                     Alert(
-                        title: Text("计时结束"),
+                        title: Text("计时结束\n\(userSettings.ring)"),
                         message: Text("🎉\n恭喜你!完成运动!\n详细记录可见于\n“个人信息->个人数据”"),
                         primaryButton: .default(Text("确认"), action: {
                             isTiming = false
@@ -183,20 +199,27 @@ struct SportRecording: View {
                     )
                 }
         }.navigationBarBackButtonHidden(true)
+            .onDisappear{
+                saveSportData()
+            }
     }
-    
+    //  TimeInterval转String
+    func timeIntervalString(time: TimeInterval) -> String{
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
     //  根据选择的时间计算总秒数,并初始化剩余时间
     func startTimer(){
         let totalSeconds = (selectedHours * 3600) + (selectedMinutes * 60) + selectedSeconds
         totaltime = TimeInterval(totalSeconds)
         timeRemaining = totaltime
     }
-    //  将剩余时间转化为String,用于显示
-    func timeString(time: TimeInterval) -> String {
-        let hours = Int(time) / 3600
-        let minutes = Int(time) / 60 % 60
-        let seconds = Int(time) % 60
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    //  保存运动数据
+    func saveSportData(){
+        //  保存数据
+        dataBase.saveSportData(id: userSettings.id, date: sportData.date, consumTime: sportData.consumTime, checkImage: sportData.checkImage)
     }
 }
 

@@ -11,8 +11,6 @@ struct UserInfo: View {
     @StateObject var userSettings = UserSettings.shared      //  设置信息
     @StateObject var dataBase = SQLiteDatabase.shared   //  用户数据
     //  从母视图UserHomepage传来的绑定值,保证本视图修改后母视图信息的同步更新
-//    @Binding var logo: UIImage
-//    @Binding var username: String
     @Binding var userInfo: Info
     
     @State var isEditMode = false;  // 修改状态
@@ -123,7 +121,6 @@ struct UserInfo: View {
             }
     }
 }
-
 
 
 

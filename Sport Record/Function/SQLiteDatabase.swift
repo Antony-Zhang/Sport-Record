@@ -7,8 +7,9 @@
 
 import SwiftUI
 import SQLite3
+import Foundation
 
-// 用户信息结构体 !!! 暂且
+// 用户信息结构体
 struct Info {
     var id: String! = "id"
     var username: String! = "昵称"
@@ -16,16 +17,14 @@ struct Info {
     var address: String! = "地址"
     var qq: String! = "扣扣"
     var logo: UIImage! = UIImage(named: "logo") //  默认为内嵌的图像
-//    var logo: String! = "logo"
 }
-//  运动数据结构体 !!!! 暂且使用String done
+//  运动数据结构体
 struct SportData{
-    var id: String!
-    var dateTime: String!
-    var consumTIme: String!
-    var checkImage: UIImage!
+    var id: String! = "id"
+    var date: Date! = Date()
+    var consumTime: Date! = Date()
+    var checkImage: UIImage! = UIImage(named: "sport")
 }
-
 
 // SQLite3数据库管理类 [单例模式]
 class SQLiteDatabase: ObservableObject {
@@ -55,7 +54,7 @@ class SQLiteDatabase: ObservableObject {
     let createSportDataQuery = """
         CREATE TABLE IF NOT EXISTS SportData (
             id TEXT PRIMARY KEY NOT NULL,
-            dateTime DATETIME,
+            dateString TEXT,
             consumTime TEXT,
             checkImage BLOB,
             FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -65,8 +64,9 @@ class SQLiteDatabase: ObservableObject {
     //  初始化
     private init() {
         dbPointer = nil
-        // 打开数据库,文件为“MovieRecord.db”
-        let fileURL = try! FileManager.default
+        // 打开数据库,文件为“SportRecord.db”
+        let filemanager = FileManager.default
+        let fileURL = try! filemanager
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("SportRecord.db")
         if sqlite3_open(fileURL.path, &dbPointer) == SQLITE_OK {
@@ -200,7 +200,7 @@ class SQLiteDatabase: ObservableObject {
         sqlite3_finalize(statement)
         return userInfo
     }
-    //  更新用户信息——LOGO todo 更新无效
+    //  更新用户信息——LOGO done 更新无效
     func updateLogo(id: String, logo: UIImage){
         let updateLogoQuery = (ExitOrNot(table: "UserInfo", id: id)) ?
             "UPDATE UserInfo SET logo=? WHERE id=?;" :
@@ -237,7 +237,7 @@ class SQLiteDatabase: ObservableObject {
         //  done sql语句如何写? 保持不变,占位符就够了
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
-        //  todo Insert下prepare报错“table UserInfo has no column named logo”; 但是重启电脑直接运行竟然成功了!!
+        //  done Insert下prepare报错“table UserInfo has no column named logo”; 但是重启电脑直接运行竟然成功了!!
         let reg = sqlite3_prepare_v2(dbPointer, updateUserInfoQuery, -1, &statement, nil)
         print(reg)
         if reg == SQLITE_OK{
@@ -260,22 +260,27 @@ class SQLiteDatabase: ObservableObject {
     }
     
     /*   运动数据   */
-    //   查询运动数据
-    func getSportData(id: String) -> SportData{
-        let getSportDataQuery = "SELECT * FROM SportData WHERE id=?"
-        var sportData = SportData()
+    //   查询运动数据,返回所有运动数据
+    func getSportData(id: String) -> [SportData]{
+        let getSportDataQuery = "SELECT * FROM SportData WHERE id=? ORDER BY dateString"
+        var sportDataList = [SportData]()
         var statement: OpaquePointer?
         //  将String转化为SQLite语句对象并编译
-        if sqlite3_prepare_v2(dbPointer, getSportDataQuery, -1, &statement, nil) == SQLITE_OK{
+        // todo 报错:查询运动数据语句组织失败: no such column: dateString
+        let reg = sqlite3_prepare_v2(dbPointer, getSportDataQuery, -1, &statement, nil)
+        print(reg)
+        if reg == SQLITE_OK{
             //  填充SQLite语句中的参数
             sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
             //  执行语句
-            if sqlite3_step(statement) == SQLITE_ROW{
+            while sqlite3_step(statement) == SQLITE_ROW{
+                var sportData = SportData()
+                let timeString = String(cString: sqlite3_column_text(statement, 2))
+                let dateString = String(cString: sqlite3_column_text(statement, 1))
                 sportData.id = String(cString: sqlite3_column_text(statement, 0))
-                sportData.dateTime = String(cString: sqlite3_column_text(statement, 1))
-                sportData.consumTIme = String(cString: sqlite3_column_text(statement, 2))
+                sportData.date = TimeManager.stringDate(dateString: dateString)
+                sportData.consumTime = TimeManager.stringTime(timeString: timeString)
                 //  done 数据库取图片
-//                sportData.checkImage = String(cString: sqlite3_column_text(statement, 3))
                 let imageData = sqlite3_column_blob(statement, 3)
                 let imageSize = sqlite3_column_bytes(statement, 3)
                 if let data = imageData, imageSize > 4 {
@@ -284,31 +289,34 @@ class SQLiteDatabase: ObservableObject {
                 }else{
                     print("getSportData()取图片错误,数据不存在")
                 }
+                sportDataList.append(sportData)
             }
         }else{
             let errmsg = String(cString: sqlite3_errmsg(dbPointer))
-            print("查询用户信息语句组织失败: \(errmsg)")
+            print("查询运动数据语句组织失败: \(errmsg)")
         }
         sqlite3_finalize(statement)
-        return sportData
+        return sportDataList
     }
-    //  保存运动数据
-    func saveSportData(id: String,dateTime: String, consumTime: String, checkImage: UIImage){
-        let saveSportDataQuery = "INSERT INTO SportData(id, dataTime, consumTime, checkImage) VALUES(?, ?, ?, ?);"
+    //  保存运动数据 todo
+    func saveSportData(id: String, date: Date, consumTime: Date, checkImage: UIImage){
+        let saveSportDataQuery = "INSERT INTO SportData(id, dateString, consumTime, checkImage) VALUES(?, ?, ?, ?);"
         var statement: OpaquePointer?
         //  done sql语句如何写 不变
         //  将String转化为SQLite语句对象并编译
+        // todo 报错: 保存运动数据语句组织失败: table SportData has no column named dateString
         if sqlite3_prepare_v2(dbPointer, saveSportDataQuery, -1, &statement, nil) == SQLITE_OK{
+            let dateString = TimeManager.dateString(date: date)
+            let timeString = TimeManager.timeString(time: consumTime)
             //  填充SQLite语句中的参数
             sqlite3_bind_text(statement, 1, (id as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 2, (dateTime as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 3, (consumTime as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 2, (dateString as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 3, (timeString as NSString).utf8String, -1, nil)
             //  done 图片如何更新
             guard let data = checkImage.pngData() else{
                 print("参数checkImage")
                 return
             }
-//            sqlite3_bind_text(statement, 4, (checkImage as NSString).utf8String, -1, nil)
             sqlite3_bind_blob(statement, 4, (data as NSData).bytes, Int32(data.count), nil)
             //  执行语句
             if sqlite3_step(statement) != SQLITE_DONE{
